@@ -1,0 +1,19 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "appName": "Todyapp",
+  "onboarding1Title": "Manage your tasks",
+  "onboarding1Content": "You can easily manage all of your daily tasks in DoMe for free",
+  "onboarding2Title": "Create daily routine",
+  "onboarding2Content": "In Uptodo  you can create your personalized routine to stay productive",
+  "onboarding3Title": "Orgonaize your tasks",
+  "onboarding3Content": "You can organize your daily tasks by adding your tasks into separate categories",
+  "continueStr": "Continue",
+  "skip": "Skip",
+  "getStarted": "Get Started",
+  "next": "Next"
+
+  
+}
