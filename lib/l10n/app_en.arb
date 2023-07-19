@@ -13,6 +13,19 @@
   "continueStr": "Continue",
   "skip": "Skip",
   "getStarted": "Get Started",
+  "email": "Email",
+  "hintEmail": "Enter your Email",
+  "hintPassword": "Enter your password",
+  "login": "Login",
+  "signUp": "Sign up",
+  "forgotPassword": "Forgot pasword?",
+  "welcomeBack": "Welcome back\nSign to your account",
+  "username": "Username",
+  "password": "Password",
+  "facebook": "Facebook",
+  "google": "Google",
+  "or": "--------or continue with--------",
+  "dontHaveAccount": "Don’t have an account? ",
   "next": "Next"
 
   

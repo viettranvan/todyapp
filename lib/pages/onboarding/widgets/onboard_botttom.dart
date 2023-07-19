@@ -23,7 +23,7 @@ class OnboardBottom extends StatelessWidget {
     return Container(
       height: 100,
       decoration: const BoxDecoration(
-        color: AppColors.neturalBackground,
+        color: Colors.transparent,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
