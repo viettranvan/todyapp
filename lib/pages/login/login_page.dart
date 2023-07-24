@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/login/views/index.dart';
+import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
 enum _LoginSection {
@@ -101,7 +102,10 @@ class LoginPage extends StatelessWidget {
         );
       case _LoginSection.loginAction:
         return LoginActionSection(
-          onTapForgotPassword: () {},
+          onTapForgotPassword: () {
+            _formKey.currentState!.reset();
+            context.router.push(const ForgotPasswordRoute());
+          },
           onTapLogin: () => _onTapLogin(context),
           onTapFacebook: () {},
           onTapGoogle: () {},
@@ -111,25 +115,6 @@ class LoginPage extends StatelessWidget {
       default:
         return const SizedBox();
     }
-  }
-
-  String? emailValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email should not be empty';
-    } else if (!regexValidEmail.hasMatch(value)) {
-      return 'Please enter a valid email';
-    }
-    return null;
-  }
-
-  String? passwordValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter some text';
-    } else if (!regexValidPassword.hasMatch(value)) {
-      return 'Please enter a valid password';
-    }
-
-    return null;
   }
 
   void _onTapLogin(BuildContext context) {

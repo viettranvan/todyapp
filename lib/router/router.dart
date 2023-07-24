@@ -28,6 +28,14 @@ final _authenticationRoute = CustomRoute(
       path: 'login',
       page: LoginRoute.page,
     ),
+    AutoRoute(
+      path: 'forgot-password',
+      page: ForgotPasswordRoute.page,
+    ),
+    AutoRoute(
+      path: 'forgot-password-success',
+      page: ForgotPasswordSuccessRoute.page,
+    ),
   ],
 );
 

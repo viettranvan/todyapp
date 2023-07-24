@@ -42,6 +42,8 @@ flutter:
           weight: 500
         - asset: assets/fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF
           weight: 600
+        - asset: assets/fonts/SFPRODISPLAYBOLD.OTF
+          weight: 700
     - family: Helvetica
       fonts:
         - asset: assets/fonts/Helvetica-Bold.ttf

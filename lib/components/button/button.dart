@@ -35,8 +35,8 @@ class AppButton extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: ShapeDecoration(
-        shape: const StadiumBorder(),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
         color: buttonStyle.backgroundColor,
       ),
       child: CupertinoButton(

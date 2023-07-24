@@ -17,8 +17,10 @@
   "hintEmail": "Enter your Email",
   "hintPassword": "Enter your password",
   "login": "Login",
+  "submit": "Submit",
   "signUp": "Sign up",
-  "forgotPassword": "Forgot pasword?",
+  "signIn": "Sign in",
+  "forgotPassword": "Forgot pasword",
   "welcomeBack": "Welcome back\nSign to your account",
   "username": "Username",
   "password": "Password",
@@ -26,7 +28,13 @@
   "google": "Google",
   "or": "--------or continue with--------",
   "dontHaveAccount": "Don’t have an account? ",
-  "next": "Next"
-
+  "next": "Next",
+  "enterEmailRegister": "Enter your registered email below",
+  "rememberPassword": "Remember the password? ",
+  "success": "Success",
+  "checkYourEmail": "Please check your email for create a new password",
+  "cantGetEmail": "Can't get email? ",
+  "reSubmit": "Resubmit",
+  "backToLogin": "Back to login"
   
 }

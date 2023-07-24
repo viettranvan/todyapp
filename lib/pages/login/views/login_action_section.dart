@@ -31,7 +31,7 @@ class LoginActionSection extends StatelessWidget {
           GestureDetector(
             onTap: onTapForgotPassword,
             child: Text(
-              context.strings.forgotPassword,
+              '${context.strings.forgotPassword}?',
               style: AppTextStyles.sfProRegular16,
             ),
           ),
@@ -86,6 +86,7 @@ class LoginActionSection extends StatelessWidget {
                   ]),
             ),
           ),
+          const SizedBox(height: 20),
         ],
       ),
     );

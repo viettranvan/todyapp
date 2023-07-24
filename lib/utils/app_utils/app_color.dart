@@ -5,6 +5,7 @@ class AppColors {
 
   static const Color neturalWhite = Color(0xffffffff);
   static const Color neturalBlack = Color(0xff000000);
+  static const Color neturalGreen = Color(0xff32B768);
   static const Color neturalPrimary = Color(0xff1B1C1F);
   static const Color neturalSecondary = Color(0xff767E8C);
   static const Color neturalBackground = Color(0xffF6F7F9);

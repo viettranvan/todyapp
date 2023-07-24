@@ -43,6 +43,13 @@ class AppTextStyles {
   );
 
   //************** SF PRO SEMIBOLD ******************
+  static TextStyle sfProBold16 = const TextStyle(
+    fontFamily: 'Sf-pro-display',
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: AppColors.neturalBlack,
+  );
+
   static TextStyle sfProSemiBold26 = const TextStyle(
     fontFamily: 'Sf-pro-display',
     fontSize: 26,
