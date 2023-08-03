@@ -11,6 +11,7 @@ class AppColors {
   static const Color neturalBackground = Color(0xffF6F7F9);
   static const Color neturalLine = Color(0xffE0E5ED);
   static const Color neturalGhost = Color(0xffA9B0C5);
+  static const Color netural9 = Color(0xff999999);
 
   static const Color brandPrimary = Color(0xff24A19C);
   static const Color brandPrimaryOpacity = Color(0xffCBF1F0);

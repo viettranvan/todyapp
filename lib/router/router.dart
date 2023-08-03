@@ -29,6 +29,10 @@ final _authenticationRoute = CustomRoute(
       page: LoginRoute.page,
     ),
     AutoRoute(
+      path: 'sign-up',
+      page: SignUpRoute.page,
+    ),
+    AutoRoute(
       path: 'forgot-password',
       page: ForgotPasswordRoute.page,
     ),

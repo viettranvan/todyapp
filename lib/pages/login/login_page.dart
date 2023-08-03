@@ -12,11 +12,10 @@ enum _LoginSection {
   // loginFinger,
 }
 
-final _formKey = GlobalKey<FormState>();
-
 @RoutePage()
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -77,22 +76,18 @@ class LoginPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(context.strings.email,
-                    style: AppTextStyles.sfProRegular16),
-                const SizedBox(height: 6),
                 AppTextField(
                   controller: TextEditingController(),
                   hintText: context.strings.hintEmail,
                   textInputAction: TextInputAction.next,
+                  prefixPath: AppAssets.icEmail,
                   validator: emailValidator,
                 ),
                 const SizedBox(height: 12),
-                Text(context.strings.password,
-                    style: AppTextStyles.sfProRegular16),
-                const SizedBox(height: 6),
                 AppTextField(
                   controller: TextEditingController(),
                   hintText: context.strings.hintPassword,
+                  prefixPath: AppAssets.icLock,
                   validator: passwordValidator,
                   obscureText: true,
                 ),
@@ -102,14 +97,11 @@ class LoginPage extends StatelessWidget {
         );
       case _LoginSection.loginAction:
         return LoginActionSection(
-          onTapForgotPassword: () {
-            _formKey.currentState!.reset();
-            context.router.push(const ForgotPasswordRoute());
-          },
+          onTapForgotPassword: () => _onTapForgotPassword(context),
           onTapLogin: () => _onTapLogin(context),
           onTapFacebook: () {},
           onTapGoogle: () {},
-          onTapSignUp: () {},
+          onTapSignUp: () => _onTapSignUp(context),
         );
 
       default:
@@ -121,5 +113,14 @@ class LoginPage extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       // navigate to main page
     }
+  }
+
+  void _onTapSignUp(BuildContext context) {
+    context.router.push(const SignUpRoute());
+  }
+
+  _onTapForgotPassword(BuildContext context) {
+    _formKey.currentState!.reset();
+    context.router.push(ForgotPasswordRoute());
   }
 }

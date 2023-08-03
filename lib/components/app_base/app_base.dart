@@ -14,19 +14,34 @@ class AppBase extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => enableBackButton,
-      child: GestureDetector(
-        onTap: dismissKeyboard
-            ? () {
-                final FocusScopeNode currentScope = FocusScope.of(context);
-                if (!currentScope.hasPrimaryFocus && currentScope.hasFocus) {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                }
-              }
-            : null,
-        child: child,
-      ),
-    );
+    return enableBackButton
+        ? GestureDetector(
+            onTap: dismissKeyboard
+                ? () {
+                    final FocusScopeNode currentScope = FocusScope.of(context);
+                    if (!currentScope.hasPrimaryFocus &&
+                        currentScope.hasFocus) {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    }
+                  }
+                : null,
+            child: child,
+          )
+        : WillPopScope(
+            onWillPop: () async => enableBackButton,
+            child: GestureDetector(
+              onTap: dismissKeyboard
+                  ? () {
+                      final FocusScopeNode currentScope =
+                          FocusScope.of(context);
+                      if (!currentScope.hasPrimaryFocus &&
+                          currentScope.hasFocus) {
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      }
+                    }
+                  : null,
+              child: child,
+            ),
+          );
   }
 }

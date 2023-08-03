@@ -23,6 +23,23 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        fontFamily: 'Poppins',
+        highlightColor: Colors.transparent,
+
+        /// Prevents to splash effect when clicking.
+        splashColor: Colors.transparent,
+
+        /// Prevents the mouse cursor to highlight the tile when hovering on web.
+        hoverColor: Colors.transparent,
+
+        /// Makes the top and bottom dividers invisible when expanded.
+        dividerColor: Colors.transparent,
+
+        /// Make background transparent.
+        expansionTileTheme: const ExpansionTileThemeData(
+          backgroundColor: Colors.transparent,
+          collapsedBackgroundColor: Colors.transparent,
+        ),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       debugShowCheckedModeBanner: false,

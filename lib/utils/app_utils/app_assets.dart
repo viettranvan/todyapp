@@ -18,4 +18,8 @@ class AppAssets {
   static const logoOnboarding = 'assets/icons/logo-onboarding.svg';
   static const icEye = 'assets/icons/ic_eye.svg';
   static const icEyeClosed = 'assets/icons/ic_eye_closed.svg';
+  static const icUser = 'assets/icons/ic_user.svg';
+  static const icEmail = 'assets/icons/ic_email.svg';
+  static const icLock = 'assets/icons/ic_lock.svg';
+  static const icCheckBox = 'assets/icons/ic_check_box.svg';
 }

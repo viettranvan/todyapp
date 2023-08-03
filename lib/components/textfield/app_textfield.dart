@@ -12,6 +12,7 @@ class AppTextField extends StatefulWidget {
     this.onChanged,
     this.textInputAction,
     this.keyboardType,
+    this.prefixPath,
   });
 
   final TextEditingController controller;
@@ -21,6 +22,7 @@ class AppTextField extends StatefulWidget {
   final Function(String)? onChanged;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
+  final String? prefixPath;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -55,6 +57,12 @@ class _AppTextFieldState extends State<AppTextField> {
         hintText: widget.hintText,
         hintStyle: AppTextStyles.sfProRegular16
             .copyWith(color: AppColors.neturalGhost),
+        prefixIcon: widget.prefixPath != null
+            ? Padding(
+                padding: const EdgeInsets.only(left: 20, right: 10),
+                child: SvgPicture.asset(widget.prefixPath!),
+              )
+            : null,
         suffixIcon: Visibility(
           visible: widget.obscureText,
           child: GestureDetector(

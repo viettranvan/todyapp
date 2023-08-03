@@ -16,6 +16,7 @@
   "email": "Email",
   "hintEmail": "Enter your Email",
   "hintPassword": "Enter your password",
+  "hintConfirmPassword": "Confirm your password",
   "login": "Login",
   "submit": "Submit",
   "signUp": "Sign up",
@@ -28,6 +29,7 @@
   "google": "Google",
   "or": "--------or continue with--------",
   "dontHaveAccount": "Don’t have an account? ",
+  "alreadyHaveAnAccount": "Already have an account? ",
   "next": "Next",
   "enterEmailRegister": "Enter your registered email below",
   "rememberPassword": "Remember the password? ",
@@ -35,6 +37,13 @@
   "checkYourEmail": "Please check your email for create a new password",
   "cantGetEmail": "Can't get email? ",
   "reSubmit": "Resubmit",
-  "backToLogin": "Back to login"
+  "backToLogin": "Back to login",
+  "createAccount": "Create account!",
+  "registerToGetStarted": "Register to get started.",
+  "byRegistering": "By registering, you are agreeing with our ",
+  "and": "and",
+  "termsOfUse": "Terms of Use",
+  "privacyPolicy": "Privacy Policy",
+  "name": "Name"
   
 }

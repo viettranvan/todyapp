@@ -88,21 +88,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
             ),
           ],
         ),
-        // bottomSheet: OnboardBottom(
-        //   controller: controller,
-        //   pageIndex: pageIndex,
-        //   onNext: () => controller.nextPage(
-        //     duration: const Duration(milliseconds: 300),
-        //     curve: Curves.easeIn,
-        //   ),
-        //   onSkip: () => gotoLoginPage(context),
-        //   onGetStarted: () => gotoLoginPage(context),
-        // ),
       ),
     );
   }
 
   void gotoLoginPage(BuildContext context) {
-    context.router.replace(const LoginRoute());
+    context.router.replace(LoginRoute());
   }
 }
