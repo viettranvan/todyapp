@@ -1,10 +1,14 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_config/flutter_config.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todyapp/router/router.dart';
 
-void main() {
-  runApp(const MyApp());
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterConfig.loadEnvVariables();
+
+  return runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
