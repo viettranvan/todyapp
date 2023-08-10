@@ -9,14 +9,14 @@ class AppTextStyles {
     fontFamily: 'Helvetica',
     fontSize: 26,
     fontWeight: FontWeight.w700,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   static TextStyle helveticaBold32 = const TextStyle(
     fontFamily: 'Helvetica',
     fontSize: 32,
     fontWeight: FontWeight.w700,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   //************** SF PRO REGULAR ******************
@@ -24,7 +24,7 @@ class AppTextStyles {
     fontFamily: 'Sf-pro-display',
     fontSize: 16,
     fontWeight: FontWeight.w400,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   //************** SF PRO MEDIUM ******************
@@ -32,21 +32,21 @@ class AppTextStyles {
     fontFamily: 'Sf-pro-display',
     fontSize: 16,
     fontWeight: FontWeight.w500,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   static TextStyle sfProMedium18 = const TextStyle(
     fontFamily: 'Sf-pro-display',
     fontSize: 18,
     fontWeight: FontWeight.w500,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   static TextStyle sfProMedium26 = const TextStyle(
     fontFamily: 'Sf-pro-display',
     fontSize: 26,
     fontWeight: FontWeight.w500,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   //************** SF PRO SEMIBOLD ******************
@@ -54,13 +54,13 @@ class AppTextStyles {
     fontFamily: 'Sf-pro-display',
     fontSize: 16,
     fontWeight: FontWeight.w700,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 
   static TextStyle sfProSemiBold26 = const TextStyle(
     fontFamily: 'Sf-pro-display',
     fontSize: 26,
     fontWeight: FontWeight.w600,
-    color: AppColors.neturalBlack,
+    color: AppColors.neutralBlack,
   );
 }

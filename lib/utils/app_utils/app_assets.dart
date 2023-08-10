@@ -22,4 +22,8 @@ class AppAssets {
   static const icEmail = 'assets/icons/ic_email.svg';
   static const icLock = 'assets/icons/ic_lock.svg';
   static const icCheckBox = 'assets/icons/ic_check_box.svg';
+  static const icInfo = 'assets/icons/ic_info.svg';
+  static const thinkingCloud = 'assets/icons/thinking_cloud.svg';
+  static const icError = 'assets/icons/ic_error.svg';
+  static const icSuccess = 'assets/icons/ic_success.svg';
 }

@@ -25,7 +25,7 @@ class SplashPage extends StatelessWidget {
           Text(
             context.strings.appName,
             style: AppTextStyles.helveticaBold26.copyWith(
-              color: AppColors.neturalWhite,
+              color: AppColors.neutralWhite,
             ),
           ),
           const SizedBox(height: 16),

@@ -18,7 +18,7 @@ class HeaderSection extends StatelessWidget {
         Text(
           context.strings.registerToGetStarted,
           style:
-              AppTextStyles.sfProMedium18.copyWith(color: AppColors.netural9),
+              AppTextStyles.sfProMedium18.copyWith(color: AppColors.neutral9),
         ),
         const SizedBox(height: 30),
       ],

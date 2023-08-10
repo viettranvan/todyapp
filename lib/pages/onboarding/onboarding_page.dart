@@ -26,7 +26,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: AppColors.neturalBackground,
+        backgroundColor: AppColors.neutralBackground,
         body: Stack(
           children: [
             Positioned(

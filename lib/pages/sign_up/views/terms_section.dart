@@ -42,7 +42,7 @@ class TermsSection extends StatelessWidget {
                     borderRadius: BorderRadius.circular(2),
                     border: Border.all(
                       width: 1,
-                      color: AppColors.neturalSecondary,
+                      color: AppColors.neutralSecondary,
                     ),
                   ),
                 ),
@@ -53,7 +53,7 @@ class TermsSection extends StatelessWidget {
             TextSpan(
               text: context.strings.byRegistering,
               style: AppTextStyles.sfProRegular16.copyWith(
-                color: AppColors.netural9,
+                color: AppColors.neutral9,
               ),
               children: [
                 TextSpan(
@@ -68,7 +68,7 @@ class TermsSection extends StatelessWidget {
                 TextSpan(
                   text: ' ${context.strings.and} ',
                   style: AppTextStyles.sfProRegular16.copyWith(
-                    color: AppColors.netural9,
+                    color: AppColors.neutral9,
                   ),
                 ),
                 TextSpan(

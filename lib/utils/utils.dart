@@ -1,6 +1,5 @@
 //**** EMAIL RegExp ****/
-final regexValidEmail = RegExp(
-    r'^([_a-z0-9]+[\._a-z0-9]*)(\+[a-z0-9]+)?@(([a-z0-9-]+\.)*[a-z]{2,4})$$');
+final regexValidEmail = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
 //************ PASSWORD ******************/
 /// regex valid password:
@@ -9,6 +8,15 @@ final regexValidEmail = RegExp(
 /// Have at least one number and one special character:
 final regexValidPassword = RegExp(
     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$');
+
+/// Have at least one uppercase letter, one lowercase letter
+final regexLowerAndUpper = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])');
+
+///Have at least one number and one special character:
+final regexSpecial = RegExp(r'[`!@#$%^&*()_+\-=\[\]{};\\",.<>?\/~]');
+
+final regexNumber = RegExp(r'\d');
+//*****************************************/
 
 String? emailValidator(String? value) {
   if (value == null || value.isEmpty) {

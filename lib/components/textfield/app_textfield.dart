@@ -53,10 +53,10 @@ class _AppTextFieldState extends State<AppTextField> {
       style: AppTextStyles.sfProRegular16,
       decoration: InputDecoration(
         filled: true,
-        fillColor: AppColors.neturalBackground,
+        fillColor: AppColors.neutralBackground,
         hintText: widget.hintText,
         hintStyle: AppTextStyles.sfProRegular16
-            .copyWith(color: AppColors.neturalGhost),
+            .copyWith(color: AppColors.neutralGhost),
         prefixIcon: widget.prefixPath != null
             ? Padding(
                 padding: const EdgeInsets.only(left: 20, right: 10),
@@ -87,7 +87,7 @@ class _AppTextFieldState extends State<AppTextField> {
     borderRadius: BorderRadius.circular(8),
     borderSide: const BorderSide(
       width: 1,
-      color: AppColors.neturalLine,
+      color: AppColors.neutralLine,
     ),
   );
 }

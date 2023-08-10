@@ -1,19 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:todyapp/components/textfield/index.dart';
+import 'package:todyapp/pages/sign_up/widgets/index.dart';
 import 'package:todyapp/utils/index.dart';
 
 class InputSection extends StatelessWidget {
-  const InputSection({
+  InputSection({
     Key? key,
     required this.formKey,
   }) : super(key: key);
 
   final GlobalKey formKey;
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final passNotifier = ValueNotifier<String?>(null);
     return Form(
       key: formKey,
       child: Column(
@@ -34,7 +36,10 @@ class InputSection extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           AppTextField(
-            controller: TextEditingController(),
+            controller: controller,
+            onChanged: (value) {
+              passNotifier.value = value;
+            },
             hintText: context.strings.hintPassword,
             textInputAction: TextInputAction.next,
             prefixPath: AppAssets.icLock,
@@ -42,11 +47,19 @@ class InputSection extends StatelessWidget {
             validator: passwordValidator,
           ),
           const SizedBox(height: 12),
+          ValueListenableBuilder(
+            valueListenable: passNotifier,
+            builder: (context, value, child) {
+              return PasswordChecker(
+                password: value ?? '',
+              );
+            },
+          ),
+          const SizedBox(height: 12),
           AppTextField(
             controller: TextEditingController(),
             hintText: context.strings.hintConfirmPassword,
             prefixPath: AppAssets.icLock,
-            validator: passwordValidator,
             obscureText: true,
           ),
           const SizedBox(height: 12),

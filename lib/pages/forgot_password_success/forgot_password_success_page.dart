@@ -44,7 +44,7 @@ class ForgotPasswordSuccessPage extends StatelessWidget {
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => Navigator.pop(context),
                       style: AppTextStyles.sfProBold16.copyWith(
-                        color: AppColors.neturalGreen,
+                        color: AppColors.neutralGreen,
                       ),
                     ),
                   ],

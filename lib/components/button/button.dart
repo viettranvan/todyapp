@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:todyapp/utils/index.dart';
 
 enum ButtonStyles {
-  elevated(AppColors.brandPrimary, AppColors.neturalWhite),
-  outline(Colors.transparent, AppColors.neturalPrimary),
+  elevated(AppColors.brandPrimary, AppColors.neutralWhite),
+  outline(Colors.transparent, AppColors.neutralPrimary),
   // disable,
   ;
 

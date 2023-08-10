@@ -44,6 +44,12 @@
   "and": "and",
   "termsOfUse": "Terms of Use",
   "privacyPolicy": "Privacy Policy",
-  "name": "Name"
+  "name": "Name",
+  "yourPasswordMustBe": "Your password must be:",
+  "min8characters": "Min 8 characters",
+  "optional": "Optional",
+  "lowerUpperCase": "Lower case & Upper case",
+  "atLeastNumber": "At least 1 number",
+  "atLeastSpecial": "At least 1 special character"
   
 }
