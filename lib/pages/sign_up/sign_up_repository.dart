@@ -9,6 +9,6 @@ class SignUpRepository {
     required String email,
     required String password,
   }) =>
-      SignUpRequest()
+      AuthRequest()
           .createNewAccount(name: name, email: email, password: password);
 }
