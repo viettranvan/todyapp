@@ -1,7 +1,12 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todyapp/components/index.dart';
+import 'package:todyapp/pages/sign_up/bloc/sign_up_bloc.dart';
 import 'package:todyapp/pages/sign_up/views/index.dart';
+import 'package:todyapp/utils/index.dart';
 
 enum _SignUpSection {
   header,
@@ -19,50 +24,58 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
-  bool checkBox = false;
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return AppBase(
-      enableBackButton: false,
-      dismissKeyboard: true,
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: BaseBackground(
-          revert: true,
-          child: ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            itemBuilder: (_, index) => _itemBuilder(context, index),
-            itemCount: _SignUpSection.values.length,
-          ),
-        ),
+    return BlocProvider(
+      create: (context) => SignUpBloc(),
+      child: BlocConsumer<SignUpBloc, SignUpState>(
+        listener: _listener,
+        builder: (context, state) {
+          return AppBase(
+            enableBackButton: false,
+            dismissKeyboard: true,
+            child: Scaffold(
+              resizeToAvoidBottomInset: true,
+              body: BaseBackground(
+                parentContext: context,
+                revert: true,
+                child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  itemBuilder: (_, index) => _itemBuilder(context, index),
+                  itemCount: _SignUpSection.values.length,
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
+    var bloc = BlocProvider.of<SignUpBloc>(context);
+
     switch (_SignUpSection.values[index]) {
       case _SignUpSection.header:
         return const HeaderSection();
       case _SignUpSection.inputField:
         return InputSection(
-          formKey: _formKey,
+          formKey: formKey,
+          bloc: bloc,
         );
       case _SignUpSection.agreeTerms:
         return TermsSection(
-          toggleCheckBox: () {
-            setState(() {
-              checkBox = !checkBox;
-            });
-          },
-          checkBoxStatus: checkBox,
+          toggleCheckBox: () => bloc.add(UpdateCheckBox()),
+          checkBoxStatus: bloc.state.checkBox,
           onTapTermsOfUse: () {},
           onTapPrivacyPolicy: () {},
         );
       case _SignUpSection.signUpAction:
         return SignUpActionSection(
-          onTapSignUp: () {},
+          checkBoxStatus: bloc.state.checkBox,
+          onTapSignUp: () => _onTapSignUp(context),
           onTapFacebook: () {},
           onTapGoogle: () {},
           onTapLogin: () => _onTapLogin(context),
@@ -72,5 +85,49 @@ class _SignUpPageState extends State<SignUpPage> {
 
   _onTapLogin(BuildContext context) {
     Navigator.pop(context);
+  }
+
+  _onTapSignUp(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      BlocProvider.of<SignUpBloc>(context).add(RequestSignUp());
+    }
+  }
+
+  void _listener(BuildContext context, SignUpState state) {
+    switch (state.runtimeType) {
+      case SignUpFailure:
+        EasyLoading.dismiss();
+        final snackBar = SnackBar(
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          content: AwesomeSnackbarContent(
+            title: 'On Snap!',
+            message: (state as SignUpFailure).errorMessage,
+            contentType: ContentType.failure,
+          ),
+        );
+
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(snackBar);
+        break;
+      case SignUpLoading:
+        EasyLoading.show();
+        break;
+      case SignUpSuccess:
+        EasyLoading.dismiss();
+        SuccessDialog.show(
+          context: context,
+          content: context.strings.createAccountSuccess,
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        );
+        break;
+      default:
+        EasyLoading.dismiss();
+        break;
+    }
   }
 }

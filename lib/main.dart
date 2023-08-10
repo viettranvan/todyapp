@@ -1,12 +1,18 @@
 import 'package:auto_route/annotations.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:todyapp/components/dialog/index.dart';
 import 'package:todyapp/router/router.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   await FlutterConfig.loadEnvVariables();
+  AppLoadings.configs();
 
   return runApp(const MyApp());
 }
@@ -50,6 +56,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: AppLocalizations.supportedLocales,
       routerDelegate: _appRouter.delegate(),
       routeInformationParser: _appRouter.defaultRouteParser(),
+      builder: EasyLoading.init(),
     );
   }
 }

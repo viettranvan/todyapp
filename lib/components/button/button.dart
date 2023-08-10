@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todyapp/utils/index.dart';
 
 enum ButtonStyles {
   elevated(AppColors.brandPrimary, AppColors.neutralWhite),
+  disable(AppColors.neutral9, AppColors.neutralWhite),
+
   outline(Colors.transparent, AppColors.neutralPrimary),
   // disable,
   ;
@@ -39,13 +40,14 @@ class AppButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         color: buttonStyle.backgroundColor,
       ),
-      child: CupertinoButton(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        onPressed: onPressed,
-        child: Text(
-          title ?? '',
-          style: AppTextStyles.sfProMedium18.copyWith(
-            color: buttonStyle.textColor,
+      child: InkWell(
+        onTap: onPressed,
+        child: Center(
+          child: Text(
+            title ?? '',
+            style: AppTextStyles.sfProMedium18.copyWith(
+              color: buttonStyle.textColor,
+            ),
           ),
         ),
       ),

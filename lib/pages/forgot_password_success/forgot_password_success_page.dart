@@ -15,6 +15,7 @@ class ForgotPasswordSuccessPage extends StatelessWidget {
       enableBackButton: false,
       child: Scaffold(
         body: BaseBackground(
+          parentContext: context,
           revert: true,
           child: SafeArea(
             minimum: const EdgeInsets.symmetric(horizontal: 24),

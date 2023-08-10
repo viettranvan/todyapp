@@ -27,6 +27,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       child: Scaffold(
         backgroundColor: AppColors.neutralBackground,
         body: BaseBackground(
+          parentContext: context,
           revert: pageIndex.isOdd,
           child: Column(
             children: [

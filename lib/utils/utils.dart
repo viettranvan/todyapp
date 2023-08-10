@@ -18,6 +18,13 @@ final regexSpecial = RegExp(r'[`!@#$%^&*()_+\-=\[\]{};\\",.<>?\/~]');
 final regexNumber = RegExp(r'\d');
 //*****************************************/
 
+String? emptyValidator(String? value) {
+  if (value == null || value.isEmpty) {
+    return 'This field cannot be empty';
+  }
+  return null;
+}
+
 String? emailValidator(String? value) {
   if (value == null || value.isEmpty) {
     return 'Email should not be empty';
@@ -29,7 +36,7 @@ String? emailValidator(String? value) {
 
 String? passwordValidator(String? value) {
   if (value == null || value.isEmpty) {
-    return 'Please enter some text';
+    return 'Password should not be empty';
   } else if (!regexValidPassword.hasMatch(value)) {
     return 'Please enter a valid password';
   }

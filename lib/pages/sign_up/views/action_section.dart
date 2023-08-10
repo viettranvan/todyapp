@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/login/widgets/index.dart';
 import 'package:todyapp/utils/index.dart';
@@ -9,12 +8,14 @@ import 'package:todyapp/utils/index.dart';
 class SignUpActionSection extends StatelessWidget {
   const SignUpActionSection({
     Key? key,
+    required this.checkBoxStatus,
     required this.onTapSignUp,
     required this.onTapLogin,
     required this.onTapFacebook,
     required this.onTapGoogle,
   }) : super(key: key);
 
+  final bool checkBoxStatus;
   final VoidCallback onTapSignUp;
   final VoidCallback onTapLogin;
   final VoidCallback onTapFacebook;
@@ -28,7 +29,9 @@ class SignUpActionSection extends StatelessWidget {
         AppButton(
           title: context.strings.signUp,
           width: double.infinity,
-          onPressed: onTapSignUp,
+          buttonStyle:
+              checkBoxStatus ? ButtonStyles.elevated : ButtonStyles.disable,
+          onPressed: checkBoxStatus ? onTapSignUp : () {},
         ),
         const SizedBox(height: 10),
         Center(

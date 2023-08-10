@@ -6,20 +6,22 @@ import 'package:todyapp/utils/index.dart';
 class BaseBackground extends StatelessWidget {
   const BaseBackground({
     super.key,
+    required this.parentContext,
     required this.child,
     this.revert = false,
   });
 
+  final BuildContext parentContext;
   final Widget child;
   final bool revert;
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height * 3 / 5;
+    var height = MediaQuery.sizeOf(parentContext).height * 3 / 5;
     return Stack(
       children: [
         Positioned(
-          bottom: 0 - MediaQuery.viewInsetsOf(context).bottom,
+          bottom: 0 - MediaQuery.viewInsetsOf(parentContext).bottom,
           right: revert ? 0 : null,
           left: !revert ? 0 : null,
           child: Transform.flip(

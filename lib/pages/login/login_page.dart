@@ -24,8 +24,9 @@ class LoginPage extends StatelessWidget {
       child: Scaffold(
         resizeToAvoidBottomInset: true,
         body: BaseBackground(
+          parentContext: context,
           child: ListView.builder(
-            itemBuilder: (_, index) => _itemBuilder(context, index),
+            itemBuilder: (context, index) => _itemBuilder(context, index),
             itemCount: _LoginSection.values.length,
           ),
         ),

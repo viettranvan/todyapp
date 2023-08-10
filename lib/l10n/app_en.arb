@@ -50,6 +50,8 @@
   "optional": "Optional",
   "lowerUpperCase": "Lower case & Upper case",
   "atLeastNumber": "At least 1 number",
-  "atLeastSpecial": "At least 1 special character"
+  "atLeastSpecial": "At least 1 special character",
+  "ok": "OK",
+  "createAccountSuccess": "Create Account Success"
   
 }

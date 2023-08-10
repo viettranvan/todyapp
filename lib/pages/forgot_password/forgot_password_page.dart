@@ -17,6 +17,7 @@ class ForgotPasswordPage extends StatelessWidget {
       dismissKeyboard: true,
       child: Scaffold(
         body: BaseBackground(
+          parentContext: context,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
