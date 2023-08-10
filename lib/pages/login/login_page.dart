@@ -23,23 +23,11 @@ class LoginPage extends StatelessWidget {
       dismissKeyboard: true,
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        body: Stack(
-          children: [
-            Positioned(
-              bottom: 0 - MediaQuery.viewInsetsOf(context).bottom,
-              left: 0,
-              child: Image.asset(AppAssets.loginBackground1),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Image.asset(AppAssets.loginBackground2),
-            ),
-            ListView.builder(
-              itemBuilder: (_, index) => _itemBuilder(context, index),
-              itemCount: _LoginSection.values.length,
-            )
-          ],
+        body: BaseBackground(
+          child: ListView.builder(
+            itemBuilder: (_, index) => _itemBuilder(context, index),
+            itemCount: _LoginSection.values.length,
+          ),
         ),
       ),
     );

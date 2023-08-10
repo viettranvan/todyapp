@@ -14,50 +14,53 @@ class ForgotPasswordSuccessPage extends StatelessWidget {
     return AppBase(
       enableBackButton: false,
       child: Scaffold(
-        body: SafeArea(
-          minimum: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 20),
-              Image.asset(
-                AppAssets.forgotPassword2,
-                height: 180,
-              ),
-              const SizedBox(height: 30),
-              Text(
-                context.strings.success,
-                style: AppTextStyles.helveticaBold32,
-              ),
-              const SizedBox(height: 6),
-              Text(context.strings.checkYourEmail,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.sfProRegular16),
-              const SizedBox(height: 28),
-              Text.rich(
-                TextSpan(
-                  text: context.strings.cantGetEmail,
-                  style: AppTextStyles.sfProRegular16,
-                  children: [
-                    TextSpan(
-                      text: context.strings.reSubmit,
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => Navigator.pop(context),
-                      style: AppTextStyles.sfProBold16.copyWith(
-                        color: AppColors.neutralGreen,
-                      ),
-                    ),
-                  ],
+        body: BaseBackground(
+          revert: true,
+          child: SafeArea(
+            minimum: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 20),
+                Image.asset(
+                  AppAssets.forgotPassword2,
+                  height: 180,
                 ),
-              ),
-              const Spacer(),
-              AppButton(
-                title: context.strings.backToLogin,
-                width: double.infinity,
-                onPressed: () => context.router.replace(LoginRoute()),
-              ),
-              const SizedBox(height: 48),
-            ],
+                const SizedBox(height: 30),
+                Text(
+                  context.strings.success,
+                  style: AppTextStyles.helveticaBold32,
+                ),
+                const SizedBox(height: 6),
+                Text(context.strings.checkYourEmail,
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.sfProRegular16),
+                const SizedBox(height: 28),
+                Text.rich(
+                  TextSpan(
+                    text: context.strings.cantGetEmail,
+                    style: AppTextStyles.sfProRegular16,
+                    children: [
+                      TextSpan(
+                        text: context.strings.reSubmit,
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => Navigator.pop(context),
+                        style: AppTextStyles.sfProBold16.copyWith(
+                          color: AppColors.neutralGreen,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                AppButton(
+                  title: context.strings.backToLogin,
+                  width: double.infinity,
+                  onPressed: () => context.router.replace(LoginRoute()),
+                ),
+                const SizedBox(height: 48),
+              ],
+            ),
           ),
         ),
       ),
