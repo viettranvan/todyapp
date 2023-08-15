@@ -110,7 +110,7 @@ class LoginPage extends StatelessWidget {
 
   _onTapForgotPassword(BuildContext context) {
     _formKey.currentState!.reset();
-    context.router.push(const ResetPassWordRoute());
-    // context.router.push(const ForgotPasswordRoute());
+    // context.router.push(const ResetPassWordRoute());
+    context.router.push(const ForgotPasswordRoute());
   }
 }

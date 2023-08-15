@@ -30,7 +30,6 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     try {
       emit(SignUpLoading(state.checkBox));
       await SignUpRepository.createNewAccount(
-        name: nameController.text,
         email: emailController.text,
         password: passwordController.text,
       );
