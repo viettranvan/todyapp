@@ -6,14 +6,16 @@ class Onboading3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height * 2 / 5;
+
     return Column(
       children: [
         const SizedBox(height: 60),
         Image.asset(
           AppAssets.onboarding3,
-          height: 280,
+          height: height,
         ),
-        const SizedBox(height: 40),
+        const Spacer(),
         Text(
           context.strings.onboarding3Title,
           style: AppTextStyles.helveticaBold26,
@@ -24,6 +26,7 @@ class Onboading3 extends StatelessWidget {
           style: AppTextStyles.sfProRegular16,
           textAlign: TextAlign.center,
         ),
+        const Spacer(),
       ],
     );
   }

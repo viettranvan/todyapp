@@ -43,10 +43,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           children: [
                             SizedBox(
                                 height: MediaQuery.paddingOf(context).top + 10),
-                            InkWell(
-                              onTap: () => Navigator.pop(context),
-                              child: const Icon(Icons.arrow_back_ios_new),
-                            ),
                             const SizedBox(height: 10),
                             const HeaderSection(),
                             const SizedBox(height: 30),

@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "1051953642528",
+    "project_id": "todyapp-2f8fd",
+    "storage_bucket": "todyapp-2f8fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051953642528:android:a28e63aa497599ee961045",
+        "android_client_info": {
+          "package_name": "ryuk.viettran.todyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051953642528-1tilmmf26k8194jl2clak0sm2tg7m4sh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ryuk.viettran.todyapp",
+            "certificate_hash": "a05f64d0732d801a6cf92f3942e1b300f36a5a8c"
+          }
+        },
+        {
+          "client_id": "1051953642528-7tl62d7pmngp65dd1u88160jm49t6aeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051953642528-7tl62d7pmngp65dd1u88160jm49t6aeh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1051953642528-gfl0ha48aj8a7u5m7535ta3k90fempkc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ryuk.viettran.todyapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1051953642528:android:dfee51725f08ab86961045",
+        "android_client_info": {
+          "package_name": "ryuk.viettran.todyapp.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1051953642528-llveu7m5fl93l9uag5cpje6tve8ut05q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ryuk.viettran.todyapp.dev",
+            "certificate_hash": "a05f64d0732d801a6cf92f3942e1b300f36a5a8c"
+          }
+        },
+        {
+          "client_id": "1051953642528-7tl62d7pmngp65dd1u88160jm49t6aeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1051953642528-7tl62d7pmngp65dd1u88160jm49t6aeh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1051953642528-gfl0ha48aj8a7u5m7535ta3k90fempkc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ryuk.viettran.todyapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

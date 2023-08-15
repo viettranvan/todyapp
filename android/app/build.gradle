@@ -8,7 +8,7 @@ if (localPropertiesFile.exists()) {
 
 def flutterRoot = localProperties.getProperty('flutter.sdk')
 if (flutterRoot == null) {
-    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+    throw new GradleException('Flutter SDK not found. Define location with flutter.sdk in the local.properties file.')
 }
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
@@ -23,16 +23,16 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 project.ext.envConfigFiles = [
-        dev               : ".env",
-        production        : ".env.prod",
+        develop               : '.env',
+        production        : '.env.prod',
 ]
-apply from: project(':flutter_config').projectDir.getPath() + "/dotenv.gradle"
-
+apply from: project(':flutter_config').projectDir.getPath() + '/dotenv.gradle'
 
 android {
-    namespace "com.example.todyapp"
+    namespace 'com.example.todyapp'
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -41,13 +41,13 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    flavorDimensions "environment"
+    flavorDimensions 'environment'
     productFlavors {
         develop {
-            dimension "environment"
+            dimension 'environment'
         }
         production {
-            dimension "environment"
+            dimension 'environment'
         }
     }
 
@@ -60,12 +60,13 @@ android {
     }
 
     defaultConfig {
-        applicationId project.env.get("APP_ID")
-        minSdkVersion flutter.minSdkVersion
+        applicationId project.env.get('APP_ID')
+        minSdkVersion 19
         targetSdkVersion flutter.targetSdkVersion
-        resValue "string", "build_config_package", "com.example.todyapp"
+        resValue 'string', 'build_config_package', 'com.example.todyapp'
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -83,4 +84,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.android.support:multidex:2.0.1'
 }

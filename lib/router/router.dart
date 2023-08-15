@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:todyapp/router/router.gr.dart';
 
+import 'guards/index.dart';
+
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
 class RootRouter extends $RootRouter {
   @override
@@ -14,6 +16,7 @@ final _authenticationRoute = CustomRoute(
   path: '/auth',
   initial: true,
   page: AuthenticationRouter.page,
+  guards: [AuthGuard()],
   children: [
     AutoRoute(
       initial: true,
@@ -39,6 +42,10 @@ final _authenticationRoute = CustomRoute(
     AutoRoute(
       path: 'forgot-password-success',
       page: ForgotPasswordSuccessRoute.page,
+    ),
+    AutoRoute(
+      path: 'reset-password',
+      page: ResetPassWordRoute.page,
     ),
   ],
 );

@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:app_links/app_links.dart';
 import 'package:auto_route/annotations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +9,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todyapp/components/dialog/index.dart';
 import 'package:todyapp/router/router.dart';
+import 'package:todyapp/router/router.gr.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +30,41 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _appRouter = RootRouter();
+
+  late AppLinks _appLinks;
+  StreamSubscription<Uri>? _linkSubscription;
+
+  @override
+  void initState() {
+    initDeepLinks();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _linkSubscription?.cancel();
+
+    super.dispose();
+  }
+
+  Future<void> initDeepLinks() async {
+    _appLinks = AppLinks();
+
+    // Check initial link if app was in cold state (terminated)
+    final appLink = await _appLinks.getInitialAppLink();
+    if (appLink != null) {
+      openAppLink(appLink);
+    }
+
+    // Handle link when app is in warm state (front or background)
+    _linkSubscription = _appLinks.uriLinkStream.listen((uri) {
+      openAppLink(uri);
+    });
+  }
+
+  void openAppLink(Uri uri) {
+    _appRouter.push(const ForgotPasswordSuccessRoute());
+  }
 
   @override
   Widget build(BuildContext context) {

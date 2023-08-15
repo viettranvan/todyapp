@@ -13,6 +13,7 @@ class AppAssets {
   static const googleLogo = 'assets/images/google-logo.png';
   static const forgotPassword1 = 'assets/images/bg-forgot-password1.png';
   static const forgotPassword2 = 'assets/images/bg-forgot-password2.png';
+  static const umaCamping3 = 'assets/images/uma-camping-3.png';
 
   // icons
   static const logoOnboarding = 'assets/icons/logo-onboarding.svg';
