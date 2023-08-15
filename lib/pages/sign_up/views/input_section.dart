@@ -61,19 +61,12 @@ class InputSection extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           AppTextField(
-            controller: bloc.confirmPasswordController,
-            hintText: context.strings.hintConfirmPassword,
-            prefixPath: AppAssets.icLock,
-            obscureText: true,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              } else if (bloc.passwordController.text != value) {
-                return 'Please make sure your passwords match';
-              }
-              return null;
-            },
-          ),
+              controller: bloc.confirmPasswordController,
+              hintText: context.strings.hintConfirmPassword,
+              prefixPath: AppAssets.icLock,
+              obscureText: true,
+              validator: (value) => confirmPasswordValidator(
+                  value, bloc.passwordController.text)),
           const SizedBox(height: 12),
         ],
       ),

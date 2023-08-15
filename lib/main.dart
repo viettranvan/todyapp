@@ -63,7 +63,15 @@ class _MyAppState extends State<MyApp> {
   }
 
   void openAppLink(Uri uri) {
-    _appRouter.push(const ForgotPasswordSuccessRoute());
+    var oobCode = uri.queryParameters["oobCode"];
+    var email = uri.queryParameters["email"];
+
+    if (oobCode != null && email != null) {
+      _appRouter.push(ResetPassWordRoute(
+        oobCode: oobCode,
+        email: email,
+      ));
+    }
   }
 
   @override

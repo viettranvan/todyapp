@@ -10,7 +10,9 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "develop"
+                "develop",
+                "--dart-define",
+                "ApiKey=AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0"
             ]
         },
         {
@@ -19,7 +21,9 @@
             "type": "dart",
             "args": [
                 "--flavor",
-                "production"
+                "production",
+                "--dart-define",
+                "ApiKey=AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0"
             ]
         }
     ]

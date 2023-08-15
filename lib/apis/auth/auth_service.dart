@@ -28,10 +28,12 @@ class AuthService {
 
   Future<ApiResponse> resetPassword({
     required String oobCode,
+    required String newPassword,
   }) async {
-    var request = AuthRequest.resetPassword(oobCode: oobCode);
+    var request = AuthRequest.resetPassword(oobCode: oobCode,newPassword:newPassword);
 
-    var response = await _client.execute(request: request);
+    var response =
+        await _client.execute(request: request, apiVersion: ApiVersion.ver3);
     return response;
   }
 

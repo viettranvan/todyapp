@@ -50,9 +50,14 @@ abstract class $RootRouter extends _i11.RootStackRouter {
       );
     },
     ResetPassWordRoute.name: (routeData) {
+      final args = routeData.argsAs<ResetPassWordRouteArgs>();
       return _i11.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.ResetPassWordPage(),
+        child: _i4.ResetPassWordPage(
+          key: args.key,
+          oobCode: args.oobCode,
+          email: args.email,
+        ),
       );
     },
     ForgotPasswordRoute.name: (routeData) {
@@ -170,16 +175,45 @@ class SplashRoute extends _i11.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ResetPassWordPage]
-class ResetPassWordRoute extends _i11.PageRouteInfo<void> {
-  const ResetPassWordRoute({List<_i11.PageRouteInfo>? children})
-      : super(
+class ResetPassWordRoute extends _i11.PageRouteInfo<ResetPassWordRouteArgs> {
+  ResetPassWordRoute({
+    _i12.Key? key,
+    required String oobCode,
+    required String email,
+    List<_i11.PageRouteInfo>? children,
+  }) : super(
           ResetPassWordRoute.name,
+          args: ResetPassWordRouteArgs(
+            key: key,
+            oobCode: oobCode,
+            email: email,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ResetPassWordRoute';
 
-  static const _i11.PageInfo<void> page = _i11.PageInfo<void>(name);
+  static const _i11.PageInfo<ResetPassWordRouteArgs> page =
+      _i11.PageInfo<ResetPassWordRouteArgs>(name);
+}
+
+class ResetPassWordRouteArgs {
+  const ResetPassWordRouteArgs({
+    this.key,
+    required this.oobCode,
+    required this.email,
+  });
+
+  final _i12.Key? key;
+
+  final String oobCode;
+
+  final String email;
+
+  @override
+  String toString() {
+    return 'ResetPassWordRouteArgs{key: $key, oobCode: $oobCode, email: $email}';
+  }
 }
 
 /// generated route for

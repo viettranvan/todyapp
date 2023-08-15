@@ -43,3 +43,13 @@ String? passwordValidator(String? value) {
 
   return null;
 }
+
+String? confirmPasswordValidator(String? value, String newPassword) {
+  if (value == null || value.isEmpty) {
+    return 'Password should not be empty';
+  } else if (newPassword != value) {
+    return 'Please make sure your passwords match';
+  }
+
+  return null;
+}

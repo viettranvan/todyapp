@@ -2,18 +2,31 @@ import 'package:dio/dio.dart';
 
 import 'index.dart';
 
+enum ApiVersion {
+  ver1,
+  ver3,
+}
+
 class APIClient {
-  final Dio dio = Dio(
+  final Dio dioV1 = Dio(
     BaseOptions(
       baseUrl: 'https://identitytoolkit.googleapis.com/v1/',
     ),
   );
 
+  final Dio dioV3 = Dio(
+    BaseOptions(
+      baseUrl: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/',
+    ),
+  );
+
   Map<String, dynamic> baseQueryParameters = {
-    'key': 'AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0',
+    'key': const String.fromEnvironment('ApiKey', defaultValue: ''),
   };
 
-  Future<ApiResponse> execute({required APIRequest request}) async {
+  Future<ApiResponse> execute(
+      {required APIRequest request,
+      ApiVersion apiVersion = ApiVersion.ver1}) async {
     final options = Options(
       method: request.method.value,
       contentType: Headers.jsonContentType,
@@ -21,6 +34,17 @@ class APIClient {
     );
     try {
       baseQueryParameters.addAll(request.parameters ?? {});
+      late Dio dio;
+      switch (apiVersion) {
+        case ApiVersion.ver1:
+          dio = dioV1;
+          break;
+        case ApiVersion.ver3:
+          dio = dioV3;
+          break;
+        default:
+          dio = dioV1;
+      }
       final response = await dio.request(
         request.path,
         queryParameters: baseQueryParameters,

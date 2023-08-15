@@ -29,14 +29,12 @@ class AuthRequest {
 
   static APIRequest resetPassword({
     required String oobCode,
+    required String newPassword,
   }) =>
-      APIRequest(
-          method: HTTPMethods.post,
-          path: 'accounts:resetPassword',
-          body: {
-            "oobCode": oobCode,
-            "requestType": "PASSWORD_RESET",
-          });
+      APIRequest(method: HTTPMethods.post, path: 'resetPassword', body: {
+        "oobCode": oobCode,
+        "newPassword": newPassword,
+      });
 
   static APIRequest changePassword({
     required String idToken,
