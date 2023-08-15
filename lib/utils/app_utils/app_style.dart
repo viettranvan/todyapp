@@ -63,4 +63,19 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.neutralBlack,
   );
+
+  // ************** LondrinaSolid ******************
+  static TextStyle londrinaRegualar32 = const TextStyle(
+    fontFamily: 'LondrinaSolid',
+    fontSize: 32,
+    fontWeight: FontWeight.w400,
+    color: AppColors.neutralBlack,
+  );
+
+  static TextStyle londrinaRegualar24 = const TextStyle(
+    fontFamily: 'LondrinaSolid',
+    fontSize: 24,
+    fontWeight: FontWeight.w400,
+    color: AppColors.neutralBlack,
+  );
 }

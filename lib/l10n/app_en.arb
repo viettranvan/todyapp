@@ -57,6 +57,14 @@
   "atLeastSpecial": "At least 1 special character",
   "ok": "OK",
   "createAccountSuccess": "Create Account Success",
-  "passwordChanged": "Password changed! You can now sign in with your new password"
+  "passwordChanged": "Password changed! You can now sign in with your new password",
+  "noInternet": "No Internet connection",
+  "checkYourInternet": "Please check your internet connection",
+  "openSettings": "Open Settings",
+  "oops": "Oops!",
+  "wellDone": "Well done!",
+  "keepGoing": "Keep going"
+
+
   
 }

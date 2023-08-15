@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -97,20 +96,8 @@ class _SignUpPageState extends State<SignUpPage> {
     switch (state.runtimeType) {
       case SignUpFailure:
         EasyLoading.dismiss();
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'On Snap!',
-            message: (state as SignUpFailure).errorMessage,
-            contentType: ContentType.failure,
-          ),
-        );
-
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
+        ErrorDialog.show(
+            context: context, content: (state as SignUpFailure).errorMessage);
         break;
       case SignUpLoading:
         EasyLoading.show();

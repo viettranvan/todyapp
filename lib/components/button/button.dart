@@ -4,9 +4,7 @@ import 'package:todyapp/utils/index.dart';
 enum ButtonStyles {
   elevated(AppColors.brandPrimary, AppColors.neutralWhite),
   disable(AppColors.neutral9, AppColors.neutralWhite),
-
   outline(Colors.transparent, AppColors.neutralPrimary),
-  // disable,
   ;
 
   const ButtonStyles(this.backgroundColor, this.textColor);
@@ -45,7 +43,7 @@ class AppButton extends StatelessWidget {
         child: Center(
           child: Text(
             title ?? '',
-            style: AppTextStyles.sfProMedium18.copyWith(
+            style: AppTextStyles.londrinaRegualar24.copyWith(
               color: buttonStyle.textColor,
             ),
           ),

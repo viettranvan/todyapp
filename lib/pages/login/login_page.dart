@@ -99,6 +99,14 @@ class LoginPage extends StatelessWidget {
   }
 
   void _onTapLogin(BuildContext context) {
+    // context.router.push(const MainRouter());
+
+    AppDialog.show(
+      context: context,
+      content: 'login',
+      title: 'Title',
+    );
+
     if (_formKey.currentState!.validate()) {
       // navigate to main page
     }
@@ -110,7 +118,6 @@ class LoginPage extends StatelessWidget {
 
   _onTapForgotPassword(BuildContext context) {
     _formKey.currentState!.reset();
-    // context.router.push(const ResetPassWordRoute());
     context.router.push(const ForgotPasswordRoute());
   }
 }

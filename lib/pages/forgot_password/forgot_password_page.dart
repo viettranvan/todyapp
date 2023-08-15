@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -124,20 +123,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         break;
       case ForgotPasswordFailure:
         EasyLoading.dismiss();
-        final snackBar = SnackBar(
-          elevation: 0,
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          content: AwesomeSnackbarContent(
-            title: 'On Snap!',
-            message: (state as ForgotPasswordFailure).errorMessage,
-            contentType: ContentType.failure,
-          ),
-        );
-
-        ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(snackBar);
+        ErrorDialog.show(
+            context: context,
+            content: (state as ForgotPasswordFailure).errorMessage);
         break;
     }
   }

@@ -14,6 +14,13 @@ class AppAssets {
   static const forgotPassword1 = 'assets/images/bg-forgot-password1.png';
   static const forgotPassword2 = 'assets/images/bg-forgot-password2.png';
   static const umaCamping3 = 'assets/images/uma-camping-3.png';
+  static const starSkyBackground = 'assets/images/star-sky-background.jpg';
+  static const sunnyDayBackground = 'assets/images/sunny-day-background.png';
+  static const umaLamp = 'assets/images/uma-lamp.png';
+  static const umaDonut = 'assets/images/uma-donut.png';
+  static const umaCamping2 = 'assets/images/uma-camping-2.png';
+  static const sun = 'assets/images/sun.png';
+  static const rainbow = 'assets/images/rainbow.png';
 
   // icons
   static const logoOnboarding = 'assets/icons/logo-onboarding.svg';

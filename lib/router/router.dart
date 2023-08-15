@@ -9,11 +9,12 @@ class RootRouter extends $RootRouter {
   List<AutoRoute> get routes => [
         /// routes go here
         _authenticationRoute,
+        _mainRoute,
       ];
 }
 
 final _authenticationRoute = CustomRoute(
-  path: '/auth',
+  path: '/',
   initial: true,
   page: AuthenticationRouter.page,
   guards: [AuthGuard()],
@@ -50,8 +51,14 @@ final _authenticationRoute = CustomRoute(
   ],
 );
 
-// final _mainRoute = CustomRoute(
-//   initial: true,
-//   path: '',
-//   page: AuthenticationRouter.page,
-// );
+final _mainRoute = CustomRoute(
+  path: '/',
+  page: MainRouter.page,
+  children: [
+    AutoRoute(
+      path: 'home',
+      initial: true,
+      page: HomeRoute.page,
+    ),
+  ],
+);
