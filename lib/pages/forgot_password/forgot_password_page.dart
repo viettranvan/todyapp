@@ -67,14 +67,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             Text.rich(
                               TextSpan(
                                 text: context.strings.rememberPassword,
-                                style: AppTextStyles.sfProRegular16,
+                                style: AppTextStyles.aBeeZeeRegular16,
                                 children: [
                                   TextSpan(
                                     text: context.strings.signIn,
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () => Navigator.pop(context),
                                     style:
-                                        AppTextStyles.sfProRegular16.copyWith(
+                                        AppTextStyles.aBeeZeeRegular16.copyWith(
                                       color: AppColors.brandSecondary,
                                     ),
                                   ),

@@ -27,14 +27,13 @@ class AppPage extends StatelessWidget {
   Widget _buildBottomNavigationBar(BuildContext context) {
     final hidesBottomBarWhenPushed =
         context.tabsRouter.topMatch.meta['hidesBottomBarWhenPushed'] == true;
-
     return AnimatedOpacity(
       curve: Curves.easeInOut,
       duration: const Duration(milliseconds: 500),
       opacity: hidesBottomBarWhenPushed ? 0 : 1,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12, left: 10, right: 10),
-        height: 70,
+        height: 70 + MediaQuery.paddingOf(context).bottom,
+        padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(20),
@@ -89,6 +88,19 @@ class MainNavigationBar extends StatelessWidget {
           title: context.strings.chats,
           isActive: tabIndex == 1,
         ),
+        Container(
+          height: 50,
+          width: 50,
+          decoration: const BoxDecoration(
+            color: AppColors.brandSecondary,
+            shape: BoxShape.circle,
+          ),
+          child: const Center(
+              child: Text(
+            '+',
+            style: TextStyle(color: AppColors.neutralWhite, fontSize: 25),
+          )),
+        ),
         MainTab(
           onTap: () => onChangeTab(2),
           assetPath: AppAssets.callsIcon,
@@ -136,7 +148,7 @@ class MainTab extends StatelessWidget {
           ),
           Text(
             title,
-            style: AppTextStyles.sfProMedium16.copyWith(
+            style: AppTextStyles.aBeeZeeRegular12.copyWith(
               color: isActive ? AppColors.brandPrimary : AppColors.neutralBlack,
             ),
           )

@@ -42,7 +42,7 @@ class AppDialog {
                   ),
                   Text(
                     content,
-                    style: AppTextStyles.sfProMedium16,
+                    style: AppTextStyles.aBeeZeeRegular16,
                     textAlign: TextAlign.center,
                   ),
                   Row(

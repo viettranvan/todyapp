@@ -52,14 +52,14 @@ class TermsSection extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               text: context.strings.byRegistering,
-              style: AppTextStyles.sfProRegular16.copyWith(
+              style: AppTextStyles.aBeeZeeRegular16.copyWith(
                 color: AppColors.neutral9,
               ),
               children: [
                 TextSpan(
                   text: context.strings.termsOfUse,
                   recognizer: TapGestureRecognizer()..onTap = onTapTermsOfUse,
-                  style: AppTextStyles.sfProRegular16.copyWith(
+                  style: AppTextStyles.aBeeZeeRegular16.copyWith(
                     color: AppColors.brandPrimary,
                     decoration: TextDecoration.underline,
                     decorationColor: AppColors.brandPrimary,
@@ -67,7 +67,7 @@ class TermsSection extends StatelessWidget {
                 ),
                 TextSpan(
                   text: ' ${context.strings.and} ',
-                  style: AppTextStyles.sfProRegular16.copyWith(
+                  style: AppTextStyles.aBeeZeeRegular16.copyWith(
                     color: AppColors.neutral9,
                   ),
                 ),
@@ -75,7 +75,7 @@ class TermsSection extends StatelessWidget {
                   text: context.strings.privacyPolicy,
                   recognizer: TapGestureRecognizer()
                     ..onTap = onTapPrivacyPolicy,
-                  style: AppTextStyles.sfProRegular16.copyWith(
+                  style: AppTextStyles.aBeeZeeRegular16.copyWith(
                     color: AppColors.brandPrimary,
                     decoration: TextDecoration.underline,
                     decorationColor: AppColors.brandPrimary,

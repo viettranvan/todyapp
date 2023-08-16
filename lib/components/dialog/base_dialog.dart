@@ -49,7 +49,7 @@ class BaseDialog extends StatelessWidget {
           Text(
             content,
             textAlign: TextAlign.center,
-            style: AppTextStyles.sfProRegular16.copyWith(
+            style: AppTextStyles.aBeeZeeRegular16.copyWith(
               color: AppColors.neutralWhite,
             ),
           ),

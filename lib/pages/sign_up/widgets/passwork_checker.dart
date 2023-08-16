@@ -158,7 +158,7 @@ class _PasswordCheckerOverlayEntry extends StatelessWidget {
                             children: [
                               Text(
                                 context.strings.yourPasswordMustBe,
-                                style: AppTextStyles.sfProBold16,
+                                style: AppTextStyles.mulishBoldTitle,
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 16),
@@ -214,7 +214,7 @@ class _PasswordCheckerItem extends StatelessWidget {
         const SizedBox(width: 4),
         Text(
           title,
-          style: AppTextStyles.sfProRegular16,
+          style: AppTextStyles.aBeeZeeRegular16,
         ),
       ],
     );

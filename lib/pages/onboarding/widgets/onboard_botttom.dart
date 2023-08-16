@@ -56,7 +56,7 @@ class OnboardBottom extends StatelessWidget {
                         InkWell(
                           onTap: onSkip,
                           child: Text(context.strings.skip,
-                              style: AppTextStyles.sfProRegular16),
+                              style: AppTextStyles.aBeeZeeRegular16),
                         ),
                         Builder(builder: (context) {
                           return InkWell(
@@ -64,7 +64,7 @@ class OnboardBottom extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(context.strings.next,
-                                    style: AppTextStyles.sfProRegular16),
+                                    style: AppTextStyles.aBeeZeeRegular16),
                                 const Icon(Icons.arrow_right_alt)
                               ],
                             ),

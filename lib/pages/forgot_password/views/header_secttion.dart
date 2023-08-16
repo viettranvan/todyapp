@@ -19,7 +19,7 @@ class HeaderSection extends StatelessWidget {
           style: AppTextStyles.helveticaBold26,
         ),
         Text(context.strings.enterEmailRegister,
-            textAlign: TextAlign.center, style: AppTextStyles.sfProRegular16),
+            textAlign: TextAlign.center, style: AppTextStyles.aBeeZeeRegular16),
       ],
     );
   }

@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
             Text(
               context.strings.welcomeBack,
               textAlign: TextAlign.center,
-              style: AppTextStyles.sfProRegular16,
+              style: AppTextStyles.aBeeZeeRegular16,
             ),
             const SizedBox(height: 15),
           ],

@@ -64,7 +64,7 @@ class _SuccessWidget extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text(
                   content,
-                  style: AppTextStyles.sfProRegular16.copyWith(
+                  style: AppTextStyles.aBeeZeeRegular16.copyWith(
                     color: AppColors.neutralWhite,
                   ),
                 ),

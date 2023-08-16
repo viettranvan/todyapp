@@ -65,11 +65,11 @@ class _ResetPassWordPageState extends State<ResetPassWordPage> {
                             Text.rich(
                               TextSpan(
                                 text: "${context.strings.forStr} ",
-                                style: AppTextStyles.sfProMedium16,
+                                style: AppTextStyles.poppinsMedium18,
                                 children: [
                                   TextSpan(
                                     text: widget.email,
-                                    style: AppTextStyles.sfProBold16,
+                                    style: AppTextStyles.poppinsSemiBold16,
                                   ),
                                 ],
                               ),

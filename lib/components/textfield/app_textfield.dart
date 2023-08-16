@@ -50,12 +50,12 @@ class _AppTextFieldState extends State<AppTextField> {
       },
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
-      style: AppTextStyles.sfProRegular16,
+      style: AppTextStyles.aBeeZeeRegular16,
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.neutralBackground,
         hintText: widget.hintText,
-        hintStyle: AppTextStyles.sfProRegular16
+        hintStyle: AppTextStyles.aBeeZeeRegular16
             .copyWith(color: AppColors.neutralGhost),
         prefixIcon: widget.prefixPath != null
             ? Padding(

@@ -27,6 +27,7 @@ dependencies:
   firebase_core: ^2.15.0
   app_links: ^3.4.3
   dio: ^5.3.2
+  cached_network_image: ^3.2.3
 
 
 
@@ -47,15 +48,6 @@ flutter:
     - assets/images/
   
   fonts:
-    - family: Sf-pro-display
-      fonts:
-        - asset: assets/fonts/SFPRODISPLAYREGULAR.OTF
-        - asset: assets/fonts/SFPRODISPLAYMEDIUM.OTF
-          weight: 500
-        - asset: assets/fonts/SFPRODISPLAYSEMIBOLDITALIC.OTF
-          weight: 600
-        - asset: assets/fonts/SFPRODISPLAYBOLD.OTF
-          weight: 700
     - family: Helvetica
       fonts:
         - asset: assets/fonts/Helvetica-Bold.ttf
@@ -64,3 +56,34 @@ flutter:
       fonts:
         - asset: assets/fonts/LondrinaSolid-Regular.ttf
           weight: 400
+    - family: ABeeZee-Italic
+      fonts:
+        - asset: assets/fonts/ABeeZee-Italic.ttf
+
+    - family: ABeeZee-Regular
+      fonts:
+        - asset: assets/fonts/ABeeZee-Regular.ttf
+
+    - family: Mulish-Bold
+      fonts:
+        - asset: assets/fonts/Mulish-Bold.ttf
+
+    - family: Mulish-Regular
+      fonts:
+        - asset: assets/fonts/Mulish-Regular.ttf
+    
+    - family: Mulish-SemiBold
+      fonts:
+        - asset: assets/fonts/Mulish-SemiBold.ttf
+
+    - family: Poppins-SemiBold
+      fonts:
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+
+    - family: Poppins-Medium
+      fonts:
+        - asset: assets/fonts/Poppins-Medium.ttf
+    
+    - family: PTSans-Regular
+      fonts:
+        - asset: assets/fonts/PTSans-Regular.ttf

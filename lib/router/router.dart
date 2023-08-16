@@ -59,7 +59,6 @@ final _appRoute = CustomRoute(
     _chatsTabRoute,
     _artifactTabRoute,
     _settingsTabRoute,
-  
   ],
 );
 

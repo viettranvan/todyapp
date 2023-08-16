@@ -32,7 +32,7 @@ class LoginActionSection extends StatelessWidget {
             onTap: onTapForgotPassword,
             child: Text(
               '${context.strings.forgotPassword}?',
-              style: AppTextStyles.sfProRegular16,
+              style: AppTextStyles.aBeeZeeRegular16,
             ),
           ),
           const SizedBox(height: 10),
@@ -45,7 +45,7 @@ class LoginActionSection extends StatelessWidget {
           Center(
             child: Text(
               context.strings.or,
-              style: AppTextStyles.sfProRegular16,
+              style: AppTextStyles.aBeeZeeRegular16,
             ),
           ),
           const SizedBox(height: 10),
@@ -73,13 +73,13 @@ class LoginActionSection extends StatelessWidget {
             child: Text.rich(
               TextSpan(
                   text: context.strings.dontHaveAccount,
-                  style: AppTextStyles.sfProRegular16,
+                  style: AppTextStyles.aBeeZeeRegular16,
                   children: [
                     TextSpan(
                       text: context.strings.signUp,
                       recognizer: TapGestureRecognizer()
                         ..onTap = () => onTapSignUp?.call(),
-                      style: AppTextStyles.sfProRegular16.copyWith(
+                      style: AppTextStyles.aBeeZeeRegular16.copyWith(
                         color: AppColors.brandSecondary,
                       ),
                     ),

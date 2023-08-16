@@ -37,7 +37,7 @@ class SignUpActionSection extends StatelessWidget {
         Center(
           child: Text(
             context.strings.or,
-            style: AppTextStyles.sfProRegular16,
+            style: AppTextStyles.aBeeZeeRegular16,
           ),
         ),
         const SizedBox(height: 10),
@@ -65,12 +65,12 @@ class SignUpActionSection extends StatelessWidget {
           child: Text.rich(
             TextSpan(
                 text: context.strings.alreadyHaveAnAccount,
-                style: AppTextStyles.sfProRegular16,
+                style: AppTextStyles.aBeeZeeRegular16,
                 children: [
                   TextSpan(
                     text: context.strings.login,
                     recognizer: TapGestureRecognizer()..onTap = onTapLogin,
-                    style: AppTextStyles.sfProRegular16.copyWith(
+                    style: AppTextStyles.aBeeZeeRegular16.copyWith(
                       color: AppColors.brandSecondary,
                     ),
                   ),

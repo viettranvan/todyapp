@@ -23,7 +23,7 @@ class Onboading1 extends StatelessWidget {
         const SizedBox(height: 20),
         Text(
           context.strings.onboarding1Content,
-          style: AppTextStyles.sfProRegular16,
+          style: AppTextStyles.aBeeZeeRegular16,
           textAlign: TextAlign.center,
         ),
         const Spacer(),

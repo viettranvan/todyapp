@@ -14,14 +14,17 @@ class MainEmptyPage extends AutoRouter {
 class HomeTabPage extends AutoRouter {
   const HomeTabPage({super.key});
 }
+
 @RoutePage(name: 'ChatsTabRoute')
 class ChatsTabPage extends AutoRouter {
   const ChatsTabPage({super.key});
 }
+
 @RoutePage(name: 'ArtifactTabRoute')
 class ArtifactTabPage extends AutoRouter {
   const ArtifactTabPage({super.key});
 }
+
 @RoutePage(name: 'SettingsTabRoute')
 class SettingsTabPage extends AutoRouter {
   const SettingsTabPage({super.key});

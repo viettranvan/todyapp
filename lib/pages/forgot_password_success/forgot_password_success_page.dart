@@ -35,18 +35,18 @@ class ForgotPasswordSuccessPage extends StatelessWidget {
                 const SizedBox(height: 6),
                 Text(context.strings.checkYourEmail,
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.sfProRegular16),
+                    style: AppTextStyles.aBeeZeeRegular16),
                 const SizedBox(height: 28),
                 Text.rich(
                   TextSpan(
                     text: context.strings.cantGetEmail,
-                    style: AppTextStyles.sfProRegular16,
+                    style: AppTextStyles.aBeeZeeRegular16,
                     children: [
                       TextSpan(
                         text: context.strings.reSubmit,
                         recognizer: TapGestureRecognizer()
                           ..onTap = () => Navigator.pop(context),
-                        style: AppTextStyles.sfProBold16.copyWith(
+                        style: AppTextStyles.aBeeZeeRegular16.copyWith(
                           color: AppColors.neutralGreen,
                         ),
                       ),

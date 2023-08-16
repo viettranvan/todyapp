@@ -34,7 +34,7 @@ class SSOItem extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               title,
-              style: AppTextStyles.sfProMedium16,
+              style: AppTextStyles.aBeeZeeRegular16,
             ),
             const Spacer(),
           ],

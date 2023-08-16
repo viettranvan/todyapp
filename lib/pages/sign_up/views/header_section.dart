@@ -12,13 +12,13 @@ class HeaderSection extends StatelessWidget {
         const SizedBox(height: 60),
         Text(
           context.strings.createAccount,
-          style: AppTextStyles.sfProMedium26
+          style: AppTextStyles.poppinsMedium26
               .copyWith(color: AppColors.brandPrimary),
         ),
         Text(
           context.strings.registerToGetStarted,
           style:
-              AppTextStyles.sfProMedium18.copyWith(color: AppColors.neutral9),
+              AppTextStyles.poppinsMedium18.copyWith(color: AppColors.neutral9),
         ),
         const SizedBox(height: 30),
       ],
