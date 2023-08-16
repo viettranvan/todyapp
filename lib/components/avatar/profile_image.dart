@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/utils/index.dart';
 
 class ProfileImage extends StatelessWidget {
@@ -68,10 +69,10 @@ class ProfileImage extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Image.asset(
+        child: SvgPicture.asset(
           AppAssets.personIcon,
-          width: 24,
-          height: 24,
+          width: size / 3,
+          height: size / 3,
         ),
       ),
     );

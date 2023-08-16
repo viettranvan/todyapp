@@ -147,8 +147,13 @@ class _ResetPassWordPageState extends State<ResetPassWordPage> {
                             AppButton(
                               title: context.strings.goBack,
                               onPressed: () {
-                                // TODO: add dialog
-                                Navigator.pop(context);
+                                AppDialog.show(
+                                  context: context,
+                                  content: context.strings.passwordNotChange,
+                                  title: context.strings.warning,
+                                  onRightButtonTap: () =>
+                                      Navigator.pop(context),
+                                );
                               },
                             ),
                             const SizedBox(height: 48),

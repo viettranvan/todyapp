@@ -67,8 +67,12 @@
   "settings": "Settings",
   "editor": "Editor",
   "chats": "Chats",
-  "home": "Home"
-
+  "home": "Home",
+  "warning": "Warning",
+  "passwordNotChange": "Your password has not been changed, do you really want to exit?",
+  "appereance": "Appereance",
+  "notification": "Notification",
+  "appLanguage": "App Language"
 
   
 }

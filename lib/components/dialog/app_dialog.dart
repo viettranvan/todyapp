@@ -45,6 +45,7 @@ class AppDialog {
                     style: AppTextStyles.aBeeZeeRegular16,
                     textAlign: TextAlign.center,
                   ),
+                  const SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

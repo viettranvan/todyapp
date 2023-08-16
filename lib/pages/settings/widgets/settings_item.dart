@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/utils/index.dart';
 
 class SettingsItem extends StatelessWidget {
@@ -21,10 +22,12 @@ class SettingsItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Row(
           children: [
-            Image.asset(
+            SvgPicture.asset(
               iconPath,
               height: 24,
               width: 24,
+              colorFilter: const ColorFilter.mode(
+                  AppColors.neutralBlack, BlendMode.srcIn),
             ),
             const SizedBox(width: 10),
             Expanded(
@@ -33,10 +36,12 @@ class SettingsItem extends StatelessWidget {
                 style: AppTextStyles.mulishBody01,
               ),
             ),
-            Image.asset(
+            SvgPicture.asset(
               AppAssets.nextIcon,
               height: 24,
               width: 24,
+              colorFilter: const ColorFilter.mode(
+                  AppColors.neutralBlack, BlendMode.srcIn),
             ),
           ],
         ),

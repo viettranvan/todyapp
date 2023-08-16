@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
@@ -78,7 +79,7 @@ class MainNavigationBar extends StatelessWidget {
       children: [
         MainTab(
           onTap: () => onChangeTab(0),
-          assetPath: AppAssets.homeIcon,
+          assetPath: AppAssets.icHome,
           title: context.strings.home,
           isActive: tabIndex == 0,
         ),
@@ -140,11 +141,13 @@ class MainTab extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
+          SvgPicture.asset(
             assetPath,
             height: 24,
             width: 24,
-            color: isActive ? AppColors.brandPrimary : AppColors.neutralBlack,
+            colorFilter: ColorFilter.mode(
+                isActive ? AppColors.brandPrimary : AppColors.neutralBlack,
+                BlendMode.srcIn),
           ),
           Text(
             title,

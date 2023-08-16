@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todyapp/components/index.dart';
 import 'package:todyapp/utils/index.dart';
 
 import 'widgets/index.dart';
@@ -6,7 +7,6 @@ import 'widgets/index.dart';
 enum _SettingSections { userSetting, appSettings, help }
 
 String _name = 'Ryuk Tran';
-String _phone = '+84 394 848 858';
 String _avatar = '';
 
 class SettingsPage extends StatelessWidget {
@@ -40,22 +40,32 @@ class SettingsPage extends StatelessWidget {
       case _SettingSections.userSetting:
         return Column(
           children: [
-            UserInfo(
-              avatar: _avatar,
-              userName: _name,
-              phoneNumber: _phone,
-              onTapUserInfo: () => _openUserProfilePage(context),
+            const SizedBox(height: 20),
+            ProfileImage(
+              imageUrl: _avatar,
+              size: 108,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _name,
+              style: AppTextStyles.mulishSubHeading01,
             ),
             const SizedBox(height: 16),
             SettingsItem(
               iconPath: AppAssets.personIcon,
-              title: 'account',
+              title: 'Account',
               onTap: () => _openAccountPage(context),
             ),
             const SizedBox(height: 8),
             SettingsItem(
-              iconPath: AppAssets.messageIcon,
-              title: context.strings.chats,
+              iconPath: AppAssets.icLock,
+              title: 'Change Password',
+              onTap: () => _openChatsSetingsPage(context),
+            ),
+            const SizedBox(height: 8),
+            SettingsItem(
+              iconPath: AppAssets.icImage,
+              title: 'Change Image',
               onTap: () => _openChatsSetingsPage(context),
             ),
           ],
@@ -83,12 +93,6 @@ class SettingsPage extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             SettingsItem(
-              iconPath: AppAssets.dataUsageIcon,
-              title: 'dataUsage',
-              onTap: () => _openDataUsagePage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
               iconPath: AppAssets.appLanguageIcon,
               title: 'appLanguage',
               onTap: () => _openLanguagePage(context),
@@ -98,6 +102,7 @@ class SettingsPage extends StatelessWidget {
         );
       case _SettingSections.help:
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
             SettingsItem(
@@ -110,6 +115,18 @@ class SettingsPage extends StatelessWidget {
               iconPath: AppAssets.mailIcon,
               title: 'inviteYourFriends',
               onTap: () => _openInviteFriendsPage(context),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                border: Border.all(width: 1, color: AppColors.errorDefault),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Text(
+                'Log out',
+                style: AppTextStyles.aBeeZeeRegular16,
+              ),
             ),
             const SizedBox(height: 20),
           ],
@@ -135,8 +152,6 @@ class SettingsPage extends StatelessWidget {
 
   void _openApperancePage(BuildContext context) {}
 
-  _openUserProfilePage(BuildContext context) {}
-
   _openAccountPage(BuildContext context) {}
 
   _openChatsSetingsPage(BuildContext context) {}
@@ -144,8 +159,6 @@ class SettingsPage extends StatelessWidget {
   _openNotificationPage(BuildContext context) {}
 
   _openPrivacyPage(BuildContext context) {}
-
-  _openDataUsagePage(BuildContext context) {}
 
   _openHelpPage(BuildContext context) {}
 
