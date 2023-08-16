@@ -9,7 +9,7 @@ class RootRouter extends $RootRouter {
   List<AutoRoute> get routes => [
         /// routes go here
         _authenticationRoute,
-        _mainRoute,
+        _appRoute,
       ];
 }
 
@@ -51,14 +51,56 @@ final _authenticationRoute = CustomRoute(
   ],
 );
 
-final _mainRoute = CustomRoute(
+final _appRoute = CustomRoute(
   path: '/',
-  page: MainRouter.page,
+  page: AppRoute.page,
+  children: [
+    _homeTabRoute,
+    _chatsTabRoute,
+    _artifactTabRoute,
+    _settingsTabRoute,
+  
+  ],
+);
+
+final _homeTabRoute = AutoRoute(
+  path: '',
+  page: HomeTabRoute.page,
   children: [
     AutoRoute(
       path: 'home',
       initial: true,
       page: HomeRoute.page,
+    ),
+  ],
+);
+final _chatsTabRoute = AutoRoute(
+  path: 'chats',
+  page: ChatsTabRoute.page,
+  children: [
+    AutoRoute(
+      path: '',
+      page: ChatsRoute.page,
+    ),
+  ],
+);
+final _artifactTabRoute = AutoRoute(
+  path: 'artifact',
+  page: ArtifactRoute.page,
+  children: [
+    AutoRoute(
+      path: '',
+      page: ArtifactRoute.page,
+    ),
+  ],
+);
+final _settingsTabRoute = AutoRoute(
+  path: 'settings',
+  page: SettingsTabRoute.page,
+  children: [
+    AutoRoute(
+      path: '',
+      page: SettingsRoute.page,
     ),
   ],
 );

@@ -63,7 +63,11 @@
   "openSettings": "Open Settings",
   "oops": "Oops!",
   "wellDone": "Well done!",
-  "keepGoing": "Keep going"
+  "keepGoing": "Keep going",
+  "settings": "Settings",
+  "editor": "Editor",
+  "chats": "Chats",
+  "home": "Home"
 
 
   
