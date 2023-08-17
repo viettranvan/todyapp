@@ -1,11 +1,12 @@
 import 'package:todyapp/apis/api_client/index.dart';
 import 'package:todyapp/apis/index.dart';
+import 'package:todyapp/models/user_login/user_login.dart';
 
 class AuthService {
   AuthService();
   final APIClient _client = APIClient();
 
-  Future<ApiResponse> signInWithPassword({
+  Future<UserLogin> signInWithPassword({
     required String email,
     required String password,
   }) async {
@@ -13,7 +14,7 @@ class AuthService {
         AuthRequest.signInWithPassword(email: email, password: password);
 
     var response = await _client.execute(request: request);
-    return response;
+    return UserLogin.fromMap(response.data);
   }
 
   Future<ApiResponse> signUp({

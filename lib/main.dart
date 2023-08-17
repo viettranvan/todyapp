@@ -11,11 +11,14 @@ import 'package:todyapp/components/dialog/index.dart';
 import 'package:todyapp/router/router.dart';
 import 'package:todyapp/router/router.gr.dart';
 
+import 'utils/index.dart';
+
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
   await FlutterConfig.loadEnvVariables();
+  setupLocator();
   AppLoadings.configs();
 
   return runApp(const MyApp());

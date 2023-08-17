@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/utils/index.dart';
 
@@ -117,15 +118,18 @@ class SettingsPage extends StatelessWidget {
               onTap: () => _openInviteFriendsPage(context),
             ),
             const SizedBox(height: 10),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                border: Border.all(width: 1, color: AppColors.errorDefault),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Text(
-                'Log out',
-                style: AppTextStyles.aBeeZeeRegular16,
+            InkWell(
+              onTap: () {},
+              child: Row(
+                children: [
+                  SvgPicture.asset(AppAssets.icLogOut),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Log out',
+                    style: AppTextStyles.aBeeZeeRegular16
+                        .copyWith(color: AppColors.errorDefault),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),

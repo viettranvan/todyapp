@@ -1,9 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/login/views/index.dart';
 import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
+
+import 'bloc/login_bloc.dart';
 
 enum _LoginSection {
   loginHeading,
@@ -19,15 +23,21 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBase(
-      dismissKeyboard: true,
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        body: BaseBackground(
-          parentContext: context,
-          child: ListView.builder(
-            itemBuilder: (context, index) => _itemBuilder(context, index),
-            itemCount: _LoginSection.values.length,
+    return BlocProvider(
+      create: (context) => LoginBloc(),
+      child: BlocListener<LoginBloc, LoginState>(
+        listener: _listener,
+        child: AppBase(
+          dismissKeyboard: true,
+          child: Scaffold(
+            resizeToAvoidBottomInset: true,
+            body: BaseBackground(
+              parentContext: context,
+              child: ListView.builder(
+                itemBuilder: (context, index) => _itemBuilder(context, index),
+                itemCount: _LoginSection.values.length,
+              ),
+            ),
           ),
         ),
       ),
@@ -60,37 +70,47 @@ class LoginPage extends StatelessWidget {
       case _LoginSection.loginInput:
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppTextField(
-                  controller: TextEditingController(),
-                  hintText: context.strings.hintEmail,
-                  textInputAction: TextInputAction.next,
-                  prefixPath: AppAssets.icEmail,
-                  validator: emailValidator,
+          child: BlocBuilder<LoginBloc, LoginState>(
+            builder: (context, state) {
+              var bloc = context.read<LoginBloc>();
+
+              return Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppTextField(
+                      controller: bloc.emailController,
+                      hintText: context.strings.hintEmail,
+                      textInputAction: TextInputAction.next,
+                      prefixPath: AppAssets.icEmail,
+                      validator: emailValidator,
+                    ),
+                    const SizedBox(height: 12),
+                    AppTextField(
+                      controller: bloc.passwordController,
+                      hintText: context.strings.hintPassword,
+                      prefixPath: AppAssets.icLock,
+                      validator: passwordValidator,
+                      obscureText: true,
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 12),
-                AppTextField(
-                  controller: TextEditingController(),
-                  hintText: context.strings.hintPassword,
-                  prefixPath: AppAssets.icLock,
-                  validator: passwordValidator,
-                  obscureText: true,
-                ),
-              ],
-            ),
+              );
+            },
           ),
         );
       case _LoginSection.loginAction:
-        return LoginActionSection(
-          onTapForgotPassword: () => _onTapForgotPassword(context),
-          onTapLogin: () => _onTapLogin(context),
-          onTapFacebook: () {},
-          onTapGoogle: () {},
-          onTapSignUp: () => _onTapSignUp(context),
+        return BlocBuilder<LoginBloc, LoginState>(
+          builder: (context, state) {
+            return LoginActionSection(
+              onTapForgotPassword: () => _onTapForgotPassword(context),
+              onTapLogin: () => _onTapLogin(context),
+              onTapFacebook: () {},
+              onTapGoogle: () {},
+              onTapSignUp: () => _onTapSignUp(context),
+            );
+          },
         );
 
       default:
@@ -99,10 +119,11 @@ class LoginPage extends StatelessWidget {
   }
 
   void _onTapLogin(BuildContext context) {
-    context.router.push(const AppRoute());
+    var bloc = context.read<LoginBloc>();
 
     if (_formKey.currentState!.validate()) {
       // navigate to main page
+      bloc.add(SendLoginRequest());
     }
   }
 
@@ -113,5 +134,27 @@ class LoginPage extends StatelessWidget {
   _onTapForgotPassword(BuildContext context) {
     _formKey.currentState!.reset();
     context.router.push(const ForgotPasswordRoute());
+  }
+
+  void _listener(BuildContext context, LoginState state) {
+    switch (state.runtimeType) {
+      case Loading:
+        EasyLoading.show();
+        break;
+      case Failure:
+        EasyLoading.dismiss();
+        ErrorDialog.show(
+          context: context,
+          content: (state as Failure).errorMessage,
+        );
+        break;
+      case Success:
+        EasyLoading.dismiss();
+        context.router.push(const AppRoute());
+        break;
+      default:
+        EasyLoading.dismiss();
+        break;
+    }
   }
 }

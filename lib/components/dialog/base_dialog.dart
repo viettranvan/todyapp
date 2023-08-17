@@ -46,14 +46,18 @@ class BaseDialog extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Text(
-            content,
-            textAlign: TextAlign.center,
-            style: AppTextStyles.aBeeZeeRegular16.copyWith(
-              color: AppColors.neutralWhite,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Text(
+                content,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.aBeeZeeRegular16.copyWith(
+                  color: AppColors.neutralWhite,
+                ),
+              ),
             ),
           ),
-          const Spacer(),
+          const SizedBox(height: 10),
           AppButton(
             onPressed: onPressed,
             title: buttonTitle,

@@ -51,4 +51,5 @@ class AppAssets {
   static const settingsIcon = 'assets/icons/settings-icon.svg';
   static const icImage = 'assets/icons/ic-image.svg';
   static const icHome = 'assets/icons/ic-home.svg';
+  static const icLogOut = 'assets/icons/ic-log-out.svg';
 }

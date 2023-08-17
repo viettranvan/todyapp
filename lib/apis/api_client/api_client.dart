@@ -24,9 +24,10 @@ class APIClient {
     'key': const String.fromEnvironment('ApiKey', defaultValue: ''),
   };
 
-  Future<ApiResponse> execute(
-      {required APIRequest request,
-      ApiVersion apiVersion = ApiVersion.ver1}) async {
+  Future<ApiResponse> execute({
+    required APIRequest request,
+    ApiVersion apiVersion = ApiVersion.ver1,
+  }) async {
     final options = Options(
       method: request.method.value,
       contentType: Headers.jsonContentType,
@@ -53,8 +54,13 @@ class APIClient {
       );
 
       return ApiResponse.success(response.data);
-    } on DioException {
-      rethrow;
+    } on DioException catch (error) {
+      switch (error.type) {
+        case DioExceptionType.badResponse:
+          throw ApiResponse.error(error.response?.data["error"]["message"]);
+        default:
+          throw ApiResponse.error(error.response?.data["error"]["message"]);
+      }
     } catch (e) {
       rethrow;
     }
