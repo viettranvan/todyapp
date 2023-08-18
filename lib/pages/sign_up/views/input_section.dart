@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:todyapp/components/textfield/index.dart';
+import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/sign_up/bloc/sign_up_bloc.dart';
-import 'package:todyapp/pages/sign_up/widgets/index.dart';
 import 'package:todyapp/utils/index.dart';
 
 class InputSection extends StatelessWidget {

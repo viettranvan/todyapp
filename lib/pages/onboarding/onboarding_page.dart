@@ -66,6 +66,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void gotoLoginPage(BuildContext context) {
-    context.router.replace(LoginRoute());
+    context.router.replaceAll([const AuthenticationRouter()]);
   }
 }

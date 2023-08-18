@@ -17,9 +17,11 @@ class AppPage extends StatelessWidget {
         ArtifactRoute(),
         SettingsRoute(),
       ],
+      lazyLoad: true,
       homeIndex: 0,
       builder: (context, child) => Scaffold(
         body: child,
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: _buildBottomNavigationBar(context),
       ),
     );

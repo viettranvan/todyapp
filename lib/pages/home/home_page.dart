@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:todyapp/utils/index.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -7,9 +8,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: FlutterLogo(),
+        child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                  context: context.rootContext,
+                  builder: (context) {
+                    return const FlutterLogo();
+                  });
+            },
+            child: const FlutterLogo()),
       ),
     );
   }

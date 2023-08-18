@@ -150,7 +150,7 @@ class LoginPage extends StatelessWidget {
         break;
       case Success:
         EasyLoading.dismiss();
-        context.router.push(const AppRoute());
+        context.router.replaceAll([const AppRoute()]);
         break;
       default:
         EasyLoading.dismiss();

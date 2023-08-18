@@ -10,4 +10,9 @@ extension LocalizedBuildContext on BuildContext {
       return AppLocalizations.of(this)!;
     }
   }
+
+  BuildContext get rootContext {
+    final rootContext = findRootAncestorStateOfType<NavigatorState>()?.context;
+    return rootContext ?? this;
+  }
 }

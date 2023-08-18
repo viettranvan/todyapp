@@ -17,10 +17,12 @@ class PasswordChecker extends StatelessWidget {
   PasswordChecker({
     super.key,
     required this.password,
+    this.isBelow = true,
   });
 
   final String password;
   final GlobalKey boxKey = GlobalKey();
+  final bool isBelow;
 
   int get totalPoint {
     int result = 0;
@@ -33,12 +35,13 @@ class PasswordChecker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         TooltipPasswordChecker().show(
           context: context,
           boxKey: boxKey,
           password: password,
+          isBelow: isBelow,
         );
       },
       child: SizedBox(
@@ -84,14 +87,15 @@ class TooltipPasswordChecker {
     required BuildContext context,
     required GlobalKey boxKey,
     required String password,
+    required bool isBelow,
   }) {
     _position = _getPosition(boxKey);
     _entry = OverlayEntry(builder: (context) {
       return _PasswordCheckerOverlayEntry(
-        boxPosition: _position,
-        dispose: dispose,
-        password: password,
-      );
+          boxPosition: _position,
+          dispose: dispose,
+          password: password,
+          isBelow: isBelow);
     });
     return Overlay.of(context).insert(_entry);
   }
@@ -115,42 +119,43 @@ class _PasswordCheckerOverlayEntry extends StatelessWidget {
     required this.dispose,
     required this.boxPosition,
     required this.password,
+    required this.isBelow,
   }) : super(key: key);
 
   final VoidCallback dispose;
   final Offset boxPosition;
   final String password;
+  final bool isBelow;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, boxConstraints) {
       final double witdth =
-          boxConstraints.maxWidth > 400 ? 400 : boxConstraints.maxWidth;
+          (boxConstraints.maxWidth > 400 ? 400 : boxConstraints.maxWidth) - 48;
+      final height = witdth * 300 / 400;
       return Material(
         color: Colors.transparent,
         child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
+          behavior: HitTestBehavior.translucent,
           onTap: dispose,
           child: Stack(
-            children: List<Widget>.generate(
-                  3,
-                  (index) => Positioned(
-                    top: boxPosition.dy + index * (30 - (2 - index) * 10.0) / 2,
-                    left: boxConstraints.maxWidth / 2 +
-                        10 * (2 - index) -
-                        (30 - (2 - index) * 10.0) / 2,
-                    child: _CircleWidget(size: 30 - (2 - index) * 10.0),
-                  ),
-                ).toList() +
+            children: _listBubble(boxConstraints) +
                 [
                   Positioned(
-                    top: boxPosition.dy + 40,
+                    top: isBelow
+                        ? boxPosition.dy + 40
+                        : boxPosition.dy - height - 40,
+                    // top: boxPosition.dy + 40,
                     child: Stack(
                       alignment: AlignmentDirectional.center,
                       children: [
-                        SvgPicture.asset(
-                          AppAssets.thinkingCloud,
-                          width: witdth,
+                        SizedBox(
+                          width: boxConstraints.maxWidth,
+                          child: SvgPicture.asset(
+                            AppAssets.thinkingCloud,
+                            width: witdth,
+                            height: height,
+                          ),
                         ),
                         Center(
                           child: Column(
@@ -196,6 +201,28 @@ class _PasswordCheckerOverlayEntry extends StatelessWidget {
         ),
       );
     });
+  }
+
+  List<Widget> _listBubble(BoxConstraints boxConstraints) {
+    return isBelow
+        ? List<Widget>.generate(
+            3,
+            (index) => Positioned(
+              top: boxPosition.dy + index * (30 - (2 - index) * 10.0) / 2,
+              left: boxConstraints.maxWidth / 2 +
+                  10 * (2 - index) -
+                  (30 - (2 - index) * 10.0) / 2,
+              child: _CircleWidget(size: 30 - (2 - index) * 10.0),
+            ),
+          ).toList()
+        : List<Widget>.generate(
+            3,
+            (index) => Positioned(
+              top: boxPosition.dy - 10 - 15 - index * 15,
+              left: boxConstraints.maxWidth / 2 - index * 10,
+              child: _CircleWidget(size: 30 - (3 - index) * 5),
+            ),
+          ).toList();
   }
 }
 

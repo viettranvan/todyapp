@@ -1,9 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todyapp/components/index.dart';
+import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
-import 'widgets/index.dart';
+import 'bloc/settings_bloc.dart';
+import 'views/index.dart';
 
 enum _SettingSections { userSetting, appSettings, help }
 
@@ -15,21 +19,27 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: ListView.separated(
-                  itemBuilder: (_, index) => itemBuilder(context, index),
-                  separatorBuilder: separatorBuilder,
-                  itemCount: _SettingSections.values.length,
-                ),
-              )
-            ],
+    return BlocProvider(
+      create: (context) => SettingsBloc(),
+      child: BlocListener<SettingsBloc, SettingsState>(
+        listener: _listener,
+        child: Scaffold(
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (_, index) => itemBuilder(_, index),
+                      separatorBuilder: separatorBuilder,
+                      itemCount: _SettingSections.values.length,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -39,101 +49,30 @@ class SettingsPage extends StatelessWidget {
   Widget itemBuilder(BuildContext context, int index) {
     switch (_SettingSections.values[index]) {
       case _SettingSections.userSetting:
-        return Column(
-          children: [
-            const SizedBox(height: 20),
-            ProfileImage(
+        return BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            return UserSettingsSection(
               imageUrl: _avatar,
-              size: 108,
-            ),
-            const SizedBox(height: 6),
-            Text(
-              _name,
-              style: AppTextStyles.mulishSubHeading01,
-            ),
-            const SizedBox(height: 16),
-            SettingsItem(
-              iconPath: AppAssets.personIcon,
-              title: 'Account',
-              onTap: () => _openAccountPage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.icLock,
-              title: 'Change Password',
-              onTap: () => _openChatsSetingsPage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.icImage,
-              title: 'Change Image',
-              onTap: () => _openChatsSetingsPage(context),
-            ),
-          ],
+              name: _name,
+              accountCallback: () {},
+              changePasswordCallback: () => _changePassword(context),
+              changeImageCallback: () {},
+            );
+          },
         );
       case _SettingSections.appSettings:
-        return Column(
-          children: [
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.appereanceIcon,
-              title: 'appereance',
-              onTap: () => _openApperancePage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.noiificationIcon,
-              title: 'notification',
-              onTap: () => _openNotificationPage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.privacyIcon,
-              title: 'privacy',
-              onTap: () => _openPrivacyPage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.appLanguageIcon,
-              title: 'appLanguage',
-              onTap: () => _openLanguagePage(context),
-            ),
-            const SizedBox(height: 8),
-          ],
+        return AppSettingsSection(
+          appereanceCallback: () {},
+          notificationCallback: () {},
+          privacyCallback: () {},
+          appLanguageCallback: () {},
         );
       case _SettingSections.help:
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.helpIcon,
-              title: 'help',
-              onTap: () => _openHelpPage(context),
-            ),
-            const SizedBox(height: 8),
-            SettingsItem(
-              iconPath: AppAssets.mailIcon,
-              title: 'inviteYourFriends',
-              onTap: () => _openInviteFriendsPage(context),
-            ),
-            const SizedBox(height: 10),
-            InkWell(
-              onTap: () {},
-              child: Row(
-                children: [
-                  SvgPicture.asset(AppAssets.icLogOut),
-                  const SizedBox(width: 10),
-                  Text(
-                    'Log out',
-                    style: AppTextStyles.aBeeZeeRegular16
-                        .copyWith(color: AppColors.errorDefault),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-          ],
+        return HelpSections(
+          helpCallback: () {},
+          inviteFriendCallback: () {},
+          logOutCallback: () =>
+              context.read<SettingsBloc>().add(RequestLogOut()),
         );
       default:
     }
@@ -152,19 +91,53 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  _openLanguagePage(BuildContext context) {}
+  void _listener(BuildContext context, SettingsState state) {
+    switch (state.runtimeType) {
+      case Loading:
+        EasyLoading.show();
+        break;
+      case Failure:
+        EasyLoading.dismiss();
+        ErrorDialog.show(
+            context: context, content: (state as Failure).errorMessage);
+        break;
+      case Success:
+        EasyLoading.dismiss();
+        switch ((state as Success).type) {
+          case SuccessType.changePassword:
+            SuccessDialog.show(
+              context: context,
+              content: context.strings.passwordChanged,
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+              },
+            );
 
-  void _openApperancePage(BuildContext context) {}
+          case SuccessType.changeImage:
+            break;
+        }
+      case LogOutSuccess:
+        EasyLoading.dismiss();
+        AppDialog.show(
+          context: context,
+          title: context.strings.notice,
+          content: context.strings.logOutNotice,
+          onRightButtonTap: () {
+            context.router.replaceAll([const AuthenticationRouter()]);
+          },
+        );
 
-  _openAccountPage(BuildContext context) {}
+        break;
+      default:
+    }
+  }
 
-  _openChatsSetingsPage(BuildContext context) {}
-
-  _openNotificationPage(BuildContext context) {}
-
-  _openPrivacyPage(BuildContext context) {}
-
-  _openHelpPage(BuildContext context) {}
-
-  _openInviteFriendsPage(BuildContext context) {}
+  _changePassword(BuildContext context) {
+    ChangePasswordBottomSheet.show(
+        context: context.rootContext,
+        onChangePassword: (currentPassword, newPassword) {
+          context.read<SettingsBloc>().add(ChangePassword(
+              currentPassword: currentPassword, newPassword: newPassword));
+        });
+  }
 }

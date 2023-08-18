@@ -18,6 +18,7 @@
   "hintPassword": "Enter your password",
   "hinNewPassword": "Enter your new password",
   "hintConfirmPassword": "Confirm your password",
+  "hintCurrentPassword": "Enter your current password",
   "resetYourPassword": "Reset Your Password",
   "forStr": "for",
   "goBack": "Go Back",
@@ -72,7 +73,18 @@
   "passwordNotChange": "Your password has not been changed, do you really want to exit?",
   "appereance": "Appereance",
   "notification": "Notification",
-  "appLanguage": "App Language"
+  "appLanguage": "App Language",
+  "changePassword": "Change Password",
+  "account": "Account",
+  "changeImage": "Change Image",
+  "appereance": "Appereance",
+  "noiification": "Notification",
+  "privacy": "Privacy",
+  "help": "Help",
+  "inviteYourFriends": "Invite Your Friends",
+  "logOut": "Log Out",
+  "notice": "Notice",
+  "logOutNotice": "Do you want to log out?"
 
   
 }

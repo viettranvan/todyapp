@@ -8,27 +8,27 @@ class RootRouter extends $RootRouter {
   @override
   List<AutoRoute> get routes => [
         /// routes go here
+        AutoRoute(
+            initial: true,
+            path: '/',
+            page: SplashRoute.page,
+            guards: [SplashGuard()]),
+        AutoRoute(
+          path: '/onboarding',
+          page: OnboardingRoute.page,
+        ),
         _authenticationRoute,
         _appRoute,
       ];
 }
 
 final _authenticationRoute = CustomRoute(
-  path: '/',
-  initial: true,
+  path: '/auth',
   page: AuthenticationRouter.page,
   guards: [AuthGuard()],
   children: [
     AutoRoute(
       initial: true,
-      path: 'splash',
-      page: SplashRoute.page,
-    ),
-    AutoRoute(
-      path: 'onboarding',
-      page: OnboardingRoute.page,
-    ),
-    AutoRoute(
       path: 'login',
       page: LoginRoute.page,
     ),

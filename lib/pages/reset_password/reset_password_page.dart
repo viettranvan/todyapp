@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/reset_password/bloc/reset_password_bloc.dart';
-import 'package:todyapp/pages/sign_up/widgets/index.dart';
 import 'package:todyapp/utils/index.dart';
 
 @RoutePage()
