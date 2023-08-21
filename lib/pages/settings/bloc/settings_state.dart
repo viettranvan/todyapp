@@ -1,6 +1,6 @@
 part of 'settings_bloc.dart';
 
-enum SuccessType { changePassword, changeImage }
+enum SuccessType { changePassword, changeImage, logOut }
 
 @immutable
 sealed class SettingsState {}
@@ -9,13 +9,17 @@ final class SettingsInitial extends SettingsState {}
 
 final class Loading extends SettingsState {}
 
-final class Success extends SettingsState {
-  final SuccessType type;
+final class ProfileSuccess extends SettingsState {
+  final UserLogin user;
 
-  Success(this.type);
+  ProfileSuccess({required this.user});
 }
 
-final class LogOutSuccess extends SettingsState {}
+class UpdateSuccess extends SettingsState {
+  final SuccessType type;
+
+  UpdateSuccess({required this.type});
+}
 
 final class Failure extends SettingsState {
   final String errorMessage;

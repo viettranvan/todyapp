@@ -17,7 +17,6 @@ class ChangePasswordBottomSheet {
             FocusScope.of(context).requestFocus(FocusNode());
           },
           child: BottomsheetWrap(
-            parentContext: context,
             title: context.strings.changePassword,
             child: Container(
               padding: EdgeInsets.only(

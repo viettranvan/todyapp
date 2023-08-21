@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todyapp/components/index.dart';
+import 'package:todyapp/models/user_login/index.dart';
 import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
@@ -11,16 +12,13 @@ import 'views/index.dart';
 
 enum _SettingSections { userSetting, appSettings, help }
 
-String _name = 'Ryuk Tran';
-String _avatar = '';
-
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SettingsBloc(),
+      create: (context) => SettingsBloc()..add(GetUserProfile()),
       child: BlocListener<SettingsBloc, SettingsState>(
         listener: _listener,
         child: Scaffold(
@@ -50,13 +48,16 @@ class SettingsPage extends StatelessWidget {
     switch (_SettingSections.values[index]) {
       case _SettingSections.userSetting:
         return BlocBuilder<SettingsBloc, SettingsState>(
+          buildWhen: (previous, current) => (current is ProfileSuccess),
           builder: (context, state) {
+            UserLogin? user = state is ProfileSuccess ? state.user : null;
             return UserSettingsSection(
-              imageUrl: _avatar,
-              name: _name,
+              imageUrl: user?.photoUrl ?? '',
+              name: user?.displayName ?? '',
               accountCallback: () {},
               changePasswordCallback: () => _changePassword(context),
-              changeImageCallback: () {},
+              changeImageCallback: () =>
+                  _changeImage(context, user?.photoUrl),
             );
           },
         );
@@ -101,9 +102,29 @@ class SettingsPage extends StatelessWidget {
         ErrorDialog.show(
             context: context, content: (state as Failure).errorMessage);
         break;
-      case Success:
+      case ProfileSuccess:
         EasyLoading.dismiss();
-        switch ((state as Success).type) {
+
+        break;
+      case UpdateSuccess:
+        EasyLoading.dismiss();
+        switch ((state as UpdateSuccess).type) {
+          case SuccessType.logOut:
+            AppDialog.show(
+              context: context,
+              title: context.strings.notice,
+              content: context.strings.logOutNotice,
+              onRightButtonTap: () {
+                context.router.replaceAll([const AuthenticationRouter()]);
+              },
+            );
+            break;
+          case SuccessType.changeImage:
+            SuccessDialog.show(
+              context: context,
+              content: context.strings.avatarChanged,
+            );
+            break;
           case SuccessType.changePassword:
             SuccessDialog.show(
               context: context,
@@ -112,20 +133,8 @@ class SettingsPage extends StatelessWidget {
                 Navigator.of(context, rootNavigator: true).pop();
               },
             );
-
-          case SuccessType.changeImage:
             break;
         }
-      case LogOutSuccess:
-        EasyLoading.dismiss();
-        AppDialog.show(
-          context: context,
-          title: context.strings.notice,
-          content: context.strings.logOutNotice,
-          onRightButtonTap: () {
-            context.router.replaceAll([const AuthenticationRouter()]);
-          },
-        );
 
         break;
       default:
@@ -138,6 +147,17 @@ class SettingsPage extends StatelessWidget {
         onChangePassword: (currentPassword, newPassword) {
           context.read<SettingsBloc>().add(ChangePassword(
               currentPassword: currentPassword, newPassword: newPassword));
+        });
+  }
+
+  _changeImage(BuildContext context, String? currentAavatar) {
+    ChangeImageBottomSheet.show(
+        context: context.rootContext,
+        updateAvatar: (avatar) {
+          context.read<SettingsBloc>().add(UpdateAvatar(
+                currentAavatar: currentAavatar,
+                newAvatar: avatar.path,
+              ));
         });
   }
 }

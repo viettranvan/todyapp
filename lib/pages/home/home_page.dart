@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:todyapp/utils/index.dart';
@@ -11,14 +13,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: InkWell(
-            onTap: () {
-              showModalBottomSheet(
-                  context: context.rootContext,
-                  builder: (context) {
-                    return const FlutterLogo();
-                  });
-            },
-            child: const FlutterLogo()),
+          onTap: () async {
+            var refreshToken = await locator<AppStorage>()
+                .getValue(AppStorageKey.refreshToken);
+            dev.log(refreshToken ?? '');
+          },
+          child: const FlutterLogo(),
+        ),
       ),
     );
   }

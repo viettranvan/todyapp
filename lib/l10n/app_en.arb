@@ -40,8 +40,6 @@
   "rememberPassword": "Remember the password? ",
   "success": "Success",
   "checkYourEmail": "Please check your email for create a new password",
-  "cantGetEmail": "Can't get email? ",
-  "reSubmit": "Resubmit",
   "backToLogin": "Back to login",
   "createAccount": "Create account!",
   "registerToGetStarted": "Register to get started.",
@@ -59,6 +57,7 @@
   "ok": "OK",
   "createAccountSuccess": "Create Account Success",
   "passwordChanged": "Password changed! You can now sign in with your new password",
+  "avatarChanged": "Your avatar has been updated",
   "noInternet": "No Internet connection",
   "checkYourInternet": "Please check your internet connection",
   "openSettings": "Open Settings",
@@ -84,7 +83,10 @@
   "inviteYourFriends": "Invite Your Friends",
   "logOut": "Log Out",
   "notice": "Notice",
-  "logOutNotice": "Do you want to log out?"
+  "logOutNotice": "Do you want to log out?",
+  "camera": "Camera",
+  "gallery": "Gallery"
+
 
   
 }

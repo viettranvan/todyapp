@@ -12,7 +12,9 @@
                 "--flavor",
                 "develop",
                 "--dart-define",
-                "ApiKey=AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0"
+                "ApiKey=AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0",
+                "--dart-define",
+                "FirebaseStorage=https://firebasestorage.googleapis.com/v0/b/todyapp-2f8fd.appspot.com/o/"
             ]
         },
         {
@@ -23,7 +25,9 @@
                 "--flavor",
                 "production",
                 "--dart-define",
-                "ApiKey=AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0"
+                "ApiKey=AIzaSyD2FDt8pptyMPV3XU2E1tfc8TxTMaPPbZ0",
+                "--dart-define",
+                "FirebaseStorage=https://firebasestorage.googleapis.com/v0/b/todyapp-2f8fd.appspot.com/o/"
             ]
         }
     ]

@@ -11,11 +11,13 @@ class ProfileImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.maxWidthDiskCache = 1024,
     this.maxHeightDiskCache = 1024,
+    this.isLoading = false,
   });
 
   final double size;
   final String imageUrl;
   final BoxFit fit;
+  final bool isLoading;
   final int? maxWidthDiskCache;
   final int? maxHeightDiskCache;
 
@@ -25,7 +27,21 @@ class ProfileImage extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular((size / 2)),
       ),
-      child: _getProfileImage(),
+      child: Stack(
+        children: [
+          _getProfileImage(),
+          Visibility(
+            visible: isLoading,
+            child: SizedBox(
+              height: size,
+              width: size,
+              child: const CircularProgressIndicator(
+                color: AppColors.bluePrimary,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

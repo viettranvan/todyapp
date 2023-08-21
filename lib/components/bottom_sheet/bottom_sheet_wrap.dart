@@ -4,21 +4,19 @@ import 'package:todyapp/utils/index.dart';
 class BottomsheetWrap extends StatelessWidget {
   const BottomsheetWrap({
     super.key,
-    required this.parentContext,
     required this.child,
     this.title,
   });
 
   final Widget child;
   final String? title;
-  final BuildContext parentContext;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints(
         maxHeight: MediaQuery.sizeOf(context).height -
-            (MediaQuery.viewPaddingOf(parentContext).top),
+            (MediaQuery.viewPaddingOf(context).top),
       ),
       decoration: const BoxDecoration(
         boxShadow: [
@@ -65,7 +63,7 @@ class BottomsheetWrap extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Text(
                             title!,
-                            style: AppTextStyles.mulishSubHeading02,
+                            style: AppTextStyles.mulishBoldTitle,
                           ),
                         ),
                       ),

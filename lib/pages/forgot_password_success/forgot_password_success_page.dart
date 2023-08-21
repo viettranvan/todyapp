@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/router/router.gr.dart';
@@ -37,22 +36,6 @@ class ForgotPasswordSuccessPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: AppTextStyles.aBeeZeeRegular16),
                 const SizedBox(height: 28),
-                Text.rich(
-                  TextSpan(
-                    text: context.strings.cantGetEmail,
-                    style: AppTextStyles.aBeeZeeRegular16,
-                    children: [
-                      TextSpan(
-                        text: context.strings.reSubmit,
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => Navigator.pop(context),
-                        style: AppTextStyles.aBeeZeeRegular16.copyWith(
-                          color: AppColors.neutralGreen,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 const Spacer(),
                 AppButton(
                   title: context.strings.backToLogin,

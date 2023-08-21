@@ -46,11 +46,28 @@ class AuthRequest {
         "returnSecureToken": true,
       });
 
+  static APIRequest updateAvatar({
+    required String idToken,
+    required String photoUrl,
+  }) =>
+      APIRequest(method: HTTPMethods.post, path: 'accounts:update', body: {
+        "idToken": idToken,
+        "photoUrl": photoUrl,
+        "returnSecureToken": true,
+      });
+
   static APIRequest sendEmailResetPassword({
     required String email,
   }) =>
       APIRequest(method: HTTPMethods.post, path: 'accounts:sendOobCode', body: {
         "requestType": "PASSWORD_RESET",
         "email": email,
+      });
+
+  static APIRequest getUserProfile({
+    required String idToken,
+  }) =>
+      APIRequest(method: HTTPMethods.post, path: 'accounts:lookup', body: {
+        "idToken": idToken,
       });
 }

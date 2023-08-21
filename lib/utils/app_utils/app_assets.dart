@@ -52,4 +52,5 @@ class AppAssets {
   static const icImage = 'assets/icons/ic-image.svg';
   static const icHome = 'assets/icons/ic-home.svg';
   static const icLogOut = 'assets/icons/ic-log-out.svg';
+  static const icCamera = 'assets/icons/ic-camera.svg';
 }

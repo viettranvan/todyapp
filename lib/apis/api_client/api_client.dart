@@ -58,6 +58,7 @@ class APIClient {
       switch (error.type) {
         case DioExceptionType.badResponse:
           throw ApiResponse.error(error.response?.data["error"]["message"]);
+
         default:
           throw ApiResponse.error(error.response?.data["error"]["message"]);
       }

@@ -11,9 +11,16 @@ class SettingsRepository {
   }) =>
       AuthService().signInWithPassword(email: email, password: password);
 
-  Future<ApiResponse> changePassword({
+  Future<AuthModel> changePassword({
     required String idToken,
     required String newPassword,
   }) =>
       AuthService().changePassword(idToken: idToken, newPassword: newPassword);
+
+  Future<ApiResponse> updateAvatar({
+    required String photoUrl,
+  }) =>
+      AuthService().updateAvatar(photoUrl: photoUrl);
+
+  Future<UserLogin> getUserProfile() => AuthService().getUserProfile();
 }

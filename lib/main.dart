@@ -15,7 +15,6 @@ import 'utils/index.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
   await FlutterConfig.loadEnvVariables();
   setupLocator();
@@ -73,7 +72,7 @@ class _MyAppState extends State<MyApp> {
       _appRouter.push(ResetPassWordRoute(
         oobCode: oobCode,
         email: email,
-      ));
+    ));
     }
   }
 
