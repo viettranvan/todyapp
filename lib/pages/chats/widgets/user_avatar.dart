@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:todyapp/components/index.dart';
 import 'package:todyapp/utils/index.dart';
 
 class UserAvatar extends StatelessWidget {
-  const UserAvatar({super.key});
+  const UserAvatar({super.key, required this.avatar, this.displayName});
+
+  final String avatar;
+  final String? displayName;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
+        SizedBox(
           height: 60,
           width: 60,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: NetworkImage(fakeUrl),
-              fit: BoxFit.cover,
-            ),
+          child: AvatarImage(
+            size: 60,
+            imageUrl: avatar,
+            name: displayName ?? '',
           ),
+          // decoration:
         ),
         Positioned(
           bottom: 2,

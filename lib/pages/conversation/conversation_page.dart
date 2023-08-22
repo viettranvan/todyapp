@@ -1,33 +1,38 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/components/index.dart';
+import 'package:todyapp/models/index.dart';
 import 'package:todyapp/pages/conversation/widgets/index.dart';
 import 'package:todyapp/utils/index.dart';
 
 @RoutePage()
 class ConversationPage extends StatelessWidget {
-  const ConversationPage({super.key});
+  const ConversationPage({super.key, required this.partnerUser});
+
+  final UserProfile partnerUser;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 24,
-        title: const Row(
+        title: Row(
           children: [
             AvatarImage(
-              imageUrl: fakeUrl,
+              imageUrl: partnerUser.photoUrl ?? '',
+              name: partnerUser.displayName ?? '',
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Name',
+                  partnerUser.displayName ?? '',
                   style: AppTextStyles.mulishSubHeading02,
                 ),
-                Text('Active now', style: AppTextStyles.aBeeZeeRegular12),
+                const Text('Active now', style: AppTextStyles.aBeeZeeRegular12),
               ],
             ),
           ],
@@ -54,41 +59,78 @@ class ConversationPage extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 6),
-            Center(child: SvgPicture.asset(AppAssets.icSendMessage)),
+            GestureDetector(
+              onTap: () {
+                DocumentReference documentReference = FirebaseFirestore.instance
+                    .collection("messages")
+                    .doc("1-3")
+                    .collection("1-3")
+                    .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
+                MessageChat messageChat = MessageChat(
+                  idFrom: "1",
+                  idTo: "2",
+                  timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+                  content: "content",
+                  type: 0,
+                );
+
+                FirebaseFirestore.instance.runTransaction((transaction) async {
+                  transaction.set(
+                    documentReference,
+                    messageChat.toJson(),
+                  );
+                });
+              },
+              child: Center(
+                child: SvgPicture.asset(AppAssets.icSendMessage),
+              ),
+            ),
           ],
         ),
       ),
-      body: ListView(
-        children: const [
-          MessageBubble.first(
-            userImage: fakeUrl,
-            username: 'username',
-            message: 'message',
-            isMe: true,
-          ),
-          MessageBubble.next(
-            message: 'message',
-            isMe: true,
-          ),
-          MessageBubble.next(
-            message: 'message',
-            isMe: true,
-          ),
-          MessageBubble.first(
-            userImage: fakeUrl,
-            username: 'username',
-            message: 'message',
-            isMe: false,
-          ),
-          MessageBubble.next(
-            message: 'message',
-            isMe: false,
-          ),
-          MessageBubble.next(
-            message: 'message',
-            isMe: false,
-          ),
-        ],
+      body: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection("messages")
+            .doc("1-3")
+            .collection("1-3")
+            .orderBy('timestamp', descending: true)
+            .limit(20)
+            .snapshots(),
+        builder: (context, snapshot) {
+          return ListView(
+            children: const [
+              MessageBubble.first(
+                userImage: fakeUrl,
+                username: 'username',
+                message: 'message',
+                isMe: true,
+              ),
+              MessageBubble.next(
+                message: 'message',
+                isMe: true,
+              ),
+              MessageBubble.next(
+                message: 'message',
+                isMe: true,
+              ),
+              MessageBubble.first(
+                userImage: fakeUrl,
+                username: 'username',
+                message: 'message',
+                isMe: false,
+              ),
+              MessageBubble.next(
+                message: 'message',
+                isMe: false,
+              ),
+              MessageBubble.next(
+                message: 'message',
+                isMe: false,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -141,5 +183,45 @@ class ChatTextField extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MessageChat {
+  final String idFrom;
+  final String idTo;
+  final String timestamp;
+  final String content;
+  final int type;
+
+  const MessageChat({
+    required this.idFrom,
+    required this.idTo,
+    required this.timestamp,
+    required this.content,
+    required this.type,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "idFrom": idFrom,
+      "idTo": idTo,
+      "timestamp": timestamp,
+      "content": content,
+      "type": type,
+    };
+  }
+
+  factory MessageChat.fromDocument(DocumentSnapshot doc) {
+    String idFrom = doc.get("idFrom");
+    String idTo = doc.get("idTo");
+    String timestamp = doc.get("timestamp");
+    String content = doc.get("content");
+    int type = doc.get("type");
+    return MessageChat(
+        idFrom: idFrom,
+        idTo: idTo,
+        timestamp: timestamp,
+        content: content,
+        type: type);
   }
 }

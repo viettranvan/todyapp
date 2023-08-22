@@ -8,7 +8,7 @@ class AuthService {
   AuthService();
   final APIClient _client = APIClient();
 
-  Future<UserLogin> signInWithPassword({
+  Future<UserAuth> signInWithPassword({
     required String email,
     required String password,
   }) async {
@@ -16,7 +16,7 @@ class AuthService {
         AuthRequest.signInWithPassword(email: email, password: password);
 
     var response = await _client.execute(request: request);
-    return UserLogin.fromMap(response.data);
+    return UserAuth.fromMap(response.data);
   }
 
   Future<void> signUp({

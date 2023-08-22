@@ -26,6 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           email: emailController.text, password: passwordController.text);
 
       await locator<AppStorage>().setValue(AppStorageKey.email, resposne.email);
+      await locator<AppStorage>().setValue(AppStorageKey.uid, resposne.localId);
       await locator<AppStorage>()
           .setValue(AppStorageKey.idToken, resposne.idToken);
       await locator<AppStorage>()

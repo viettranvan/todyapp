@@ -6,7 +6,7 @@ import 'package:todyapp/models/index.dart';
 class SettingsRepository {
   SettingsRepository();
 
-  Future<UserLogin> signIn({
+  Future<UserAuth> signIn({
     required String email,
     required String password,
   }) =>

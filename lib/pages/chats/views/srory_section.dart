@@ -23,7 +23,9 @@ class StorySection extends StatelessWidget {
       width: 60,
       child: Column(
         children: [
-          const UserAvatar(),
+          const UserAvatar(
+            avatar: fakeUrl,
+          ),
           Expanded(
             child: Text(
               'Name very long',

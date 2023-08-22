@@ -3,7 +3,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 enum AppStorageKey {
   email('email'),
   idToken('accessToken'),
-  refreshToken('refreshToken');
+  refreshToken('refreshToken'),
+  uid('uid');
 
   const AppStorageKey(this.name);
   final String name;

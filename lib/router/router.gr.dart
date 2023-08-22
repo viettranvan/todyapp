@@ -10,6 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i15;
 import 'package:flutter/material.dart' as _i16;
+import 'package:todyapp/models/index.dart' as _i17;
 import 'package:todyapp/pages/app_page.dart' as _i1;
 import 'package:todyapp/pages/artifact/artifact_page.dart' as _i2;
 import 'package:todyapp/pages/chats/chats_page.dart' as _i4;
@@ -68,9 +69,13 @@ abstract class $RootRouter extends _i15.RootStackRouter {
       );
     },
     ConversationRoute.name: (routeData) {
+      final args = routeData.argsAs<ConversationRouteArgs>();
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.ConversationPage(),
+        child: _i5.ConversationPage(
+          key: args.key,
+          partnerUser: args.partnerUser,
+        ),
       );
     },
     ForgotPasswordRoute.name: (routeData) {
@@ -241,16 +246,40 @@ class ChatsTabRoute extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.ConversationPage]
-class ConversationRoute extends _i15.PageRouteInfo<void> {
-  const ConversationRoute({List<_i15.PageRouteInfo>? children})
-      : super(
+class ConversationRoute extends _i15.PageRouteInfo<ConversationRouteArgs> {
+  ConversationRoute({
+    _i16.Key? key,
+    required _i17.UserProfile partnerUser,
+    List<_i15.PageRouteInfo>? children,
+  }) : super(
           ConversationRoute.name,
+          args: ConversationRouteArgs(
+            key: key,
+            partnerUser: partnerUser,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ConversationRoute';
 
-  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
+  static const _i15.PageInfo<ConversationRouteArgs> page =
+      _i15.PageInfo<ConversationRouteArgs>(name);
+}
+
+class ConversationRouteArgs {
+  const ConversationRouteArgs({
+    this.key,
+    required this.partnerUser,
+  });
+
+  final _i16.Key? key;
+
+  final _i17.UserProfile partnerUser;
+
+  @override
+  String toString() {
+    return 'ConversationRouteArgs{key: $key, partnerUser: $partnerUser}';
+  }
 }
 
 /// generated route for
