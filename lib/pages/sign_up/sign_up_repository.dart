@@ -1,12 +1,13 @@
-import 'package:todyapp/apis/api_client/api_response.dart';
 import 'package:todyapp/apis/auth/auth_service.dart';
 
 class SignUpRepository {
   SignUpRepository._();
 
-  static Future<ApiResponse> createNewAccount({
+  static Future<void> createNewAccount({
     required String email,
     required String password,
+    required String displayName,
   }) =>
-      AuthService().signUp(email: email, password: password);
+      AuthService()
+          .signUp(email: email, password: password, displayName: displayName);
 }

@@ -4,6 +4,7 @@ import 'index.dart';
 
 enum ApiVersion {
   ver1,
+  dioFireStore,
   ver3,
 }
 
@@ -17,6 +18,13 @@ class APIClient {
   final Dio dioV3 = Dio(
     BaseOptions(
       baseUrl: 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/',
+    ),
+  );
+
+  final Dio dioFireStore = Dio(
+    BaseOptions(
+      baseUrl:
+          'https://firestore.googleapis.com/v1/projects/todyapp-2f8fd/databases/(default)/documents/',
     ),
   );
 
@@ -40,6 +48,8 @@ class APIClient {
         case ApiVersion.ver1:
           dio = dioV1;
           break;
+        case ApiVersion.dioFireStore:
+          dio = dioFireStore;
         case ApiVersion.ver3:
           dio = dioV3;
           break;

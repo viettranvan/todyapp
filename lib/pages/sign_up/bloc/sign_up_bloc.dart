@@ -32,6 +32,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await SignUpRepository.createNewAccount(
         email: emailController.text,
         password: passwordController.text,
+        displayName: nameController.text,
       );
       emit(SignUpSuccess(state.checkBox));
     } on FirebaseAuthException catch (e) {

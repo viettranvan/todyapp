@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todyapp/apis/api_client/index.dart';
 import 'package:todyapp/apis/index.dart';
 import 'package:todyapp/models/index.dart';
@@ -18,14 +19,26 @@ class AuthService {
     return UserLogin.fromMap(response.data);
   }
 
-  Future<ApiResponse> signUp({
+  Future<void> signUp({
     required String email,
+    required String displayName,
     required String password,
   }) async {
-    var request = AuthRequest.singUp(email: email, password: password);
+    var request = AuthRequest.singUp(
+      email: email,
+      password: password,
+    );
 
     var response = await _client.execute(request: request);
-    return response;
+
+    UserAuth user = UserAuth.fromMap(response.data);
+
+    FirebaseFirestore.instance.collection('users').doc(user.localId).set({
+      'displayName': displayName,
+      'photoUrl': null,
+      'email': user.email,
+      'id': user.localId
+    });
   }
 
   Future<ApiResponse> resetPassword({
@@ -69,15 +82,5 @@ class AuthService {
 
     var response = await _client.execute(request: request);
     return response;
-  }
-
-  Future<UserLogin> getUserProfile() async {
-    var idToken = await locator<AppStorage>().getValue(AppStorageKey.idToken);
-
-    var request = AuthRequest.getUserProfile(idToken: idToken ?? '');
-
-    var response = await _client.execute(request: request);
-
-    return UserLogin.fromMap((response.data["users"] as List).toList().first);
   }
 }

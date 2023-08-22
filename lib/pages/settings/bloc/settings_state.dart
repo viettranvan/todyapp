@@ -10,7 +10,7 @@ final class SettingsInitial extends SettingsState {}
 final class Loading extends SettingsState {}
 
 final class ProfileSuccess extends SettingsState {
-  final UserLogin user;
+  final UserProfile user;
 
   ProfileSuccess({required this.user});
 }

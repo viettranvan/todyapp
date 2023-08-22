@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:todyapp/apis/api_client/index.dart';
-import 'package:todyapp/models/user_login/user_login.dart';
+import 'package:todyapp/models/index.dart';
 import 'package:todyapp/pages/settings/settings_repository.dart';
 import 'package:todyapp/utils/index.dart';
 

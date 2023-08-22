@@ -1,5 +1,6 @@
 import 'package:todyapp/apis/api_client/index.dart';
 import 'package:todyapp/apis/auth/auth_service.dart';
+import 'package:todyapp/apis/user/user_service.dart';
 import 'package:todyapp/models/index.dart';
 
 class SettingsRepository {
@@ -22,5 +23,6 @@ class SettingsRepository {
   }) =>
       AuthService().updateAvatar(photoUrl: photoUrl);
 
-  Future<UserLogin> getUserProfile() => AuthService().getUserProfile();
+  Future<UserProfile> getUserProfile() =>
+      UserService().getUserProfile(userId: 'firebaseUser.uid');
 }

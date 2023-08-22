@@ -63,11 +63,4 @@ class AuthRequest {
         "requestType": "PASSWORD_RESET",
         "email": email,
       });
-
-  static APIRequest getUserProfile({
-    required String idToken,
-  }) =>
-      APIRequest(method: HTTPMethods.post, path: 'accounts:lookup', body: {
-        "idToken": idToken,
-      });
 }

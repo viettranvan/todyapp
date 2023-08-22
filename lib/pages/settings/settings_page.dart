@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:todyapp/components/index.dart';
-import 'package:todyapp/models/user_login/index.dart';
+import 'package:todyapp/models/index.dart';
 import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
@@ -51,7 +51,7 @@ class SettingsPage extends StatelessWidget {
         return BlocBuilder<SettingsBloc, SettingsState>(
           buildWhen: (previous, current) => (current is ProfileSuccess),
           builder: (context, state) {
-            UserLogin? user = state is ProfileSuccess ? state.user : null;
+            UserProfile? user = state is ProfileSuccess ? state.user : null;
             return UserSettingsSection(
               imageUrl: user?.photoUrl ?? '',
               name: user?.displayName ?? '',
@@ -154,10 +154,11 @@ class SettingsPage extends StatelessWidget {
     ChangeImageBottomSheet.show(
         context: context.rootContext,
         updateAvatar: (avatar) {
-          context.read<SettingsBloc>().add(UpdateAvatar(
-                currentAavatar: currentAavatar,
-                newAvatar: avatar.path,
-              ));
+          // TODO: need change to firestore
+          // context.read<SettingsBloc>().add(UpdateAvatar(
+          //       currentAavatar: currentAavatar,
+          //       newAvatar: avatar.path,
+          //     ));
         });
   }
 }
