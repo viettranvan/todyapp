@@ -12,6 +12,7 @@ import 'views/index.dart';
 
 enum _SettingSections { userSetting, appSettings, help }
 
+@RoutePage()
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -56,8 +57,7 @@ class SettingsPage extends StatelessWidget {
               name: user?.displayName ?? '',
               accountCallback: () {},
               changePasswordCallback: () => _changePassword(context),
-              changeImageCallback: () =>
-                  _changeImage(context, user?.photoUrl),
+              changeImageCallback: () => _changeImage(context, user?.photoUrl),
             );
           },
         );

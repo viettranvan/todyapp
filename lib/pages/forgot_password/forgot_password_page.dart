@@ -64,21 +64,24 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               ),
                             ),
                             const SizedBox(height: 6),
-                            Text.rich(
-                              TextSpan(
-                                text: context.strings.rememberPassword,
-                                style: AppTextStyles.aBeeZeeRegular16,
-                                children: [
-                                  TextSpan(
-                                    text: context.strings.signIn,
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () => Navigator.pop(context),
-                                    style:
-                                        AppTextStyles.aBeeZeeRegular16.copyWith(
-                                      color: AppColors.brandSecondary,
+                            Visibility(
+                              visible: _checkRoute(context),
+                              child: Text.rich(
+                                TextSpan(
+                                  text: context.strings.rememberPassword,
+                                  style: AppTextStyles.aBeeZeeRegular16,
+                                  children: [
+                                    TextSpan(
+                                      text: context.strings.signIn,
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => Navigator.pop(context),
+                                      style: AppTextStyles.aBeeZeeRegular16
+                                          .copyWith(
+                                        color: AppColors.brandSecondary,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -94,6 +97,16 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           onPressed: () => _onSubmit(context),
                         );
                       },
+                    ),
+                    const SizedBox(height: 20),
+                    Visibility(
+                      visible: !_checkRoute(context),
+                      child: AppButton(
+                        width: double.infinity,
+                        buttonStyle: ButtonStyles.elevatedGrey,
+                        title: context.strings.cancel,
+                        onPressed: () => Navigator.pop(context),
+                      ),
                     ),
                     const SizedBox(height: 48),
                   ],
@@ -128,5 +141,14 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             content: (state as ForgotPasswordFailure).errorMessage);
         break;
     }
+  }
+
+  _checkRoute(BuildContext context) {
+    int stackLength = AutoRouter.of(context).stack.length;
+
+    return stackLength >= 2
+        ? AutoRouter.of(context).stack[stackLength - 2].name ==
+            AuthenticationRouter.name
+        : false;
   }
 }

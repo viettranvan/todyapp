@@ -85,7 +85,9 @@
   "notice": "Notice",
   "logOutNotice": "Do you want to log out?",
   "camera": "Camera",
-  "gallery": "Gallery"
+  "gallery": "Gallery",
+  "cancel": "Cancel",
+  "search": "Search"
 
 
   

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:todyapp/apis/api_client/index.dart';
 import 'package:todyapp/pages/forgot_password/forgor_password_repository.dart';
 
 part 'forgot_password_event.dart';
@@ -26,6 +27,10 @@ class ForgotPasswordBloc
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         emit(ForgotPasswordFailure('User not found'));
+      }
+    } on ApiResponse catch (e) {
+      if (e.status == Status.error) {
+        emit(ForgotPasswordFailure(e.error.toString()));
       }
     } catch (e) {
       emit(ForgotPasswordFailure(e.toString()));

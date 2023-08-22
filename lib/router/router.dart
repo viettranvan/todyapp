@@ -19,10 +19,11 @@ class RootRouter extends $RootRouter {
         ),
         _authenticationRoute,
         _appRoute,
+        _forgotPasswordRoute
       ];
 }
 
-final _authenticationRoute = CustomRoute(
+final _authenticationRoute = AutoRoute(
   path: '/auth',
   page: AuthenticationRouter.page,
   guards: [AuthGuard()],
@@ -35,11 +36,14 @@ final _authenticationRoute = CustomRoute(
     AutoRoute(
       path: 'sign-up',
       page: SignUpRoute.page,
-    ),
-    AutoRoute(
-      path: 'forgot-password',
-      page: ForgotPasswordRoute.page,
-    ),
+    )
+  ],
+);
+
+final _forgotPasswordRoute = AutoRoute(
+  path: '/forgot-password',
+  page: ForgotPasswordRoute.page,
+  children: [
     AutoRoute(
       path: 'forgot-password-success',
       page: ForgotPasswordSuccessRoute.page,
@@ -51,7 +55,7 @@ final _authenticationRoute = CustomRoute(
   ],
 );
 
-final _appRoute = CustomRoute(
+final _appRoute = AutoRoute(
   path: '/',
   page: AppRoute.page,
   children: [
@@ -76,10 +80,20 @@ final _homeTabRoute = AutoRoute(
 final _chatsTabRoute = AutoRoute(
   path: 'chats',
   page: ChatsTabRoute.page,
+  meta: const {
+    "hidesBottomBarWhenPushed": true,
+  },
   children: [
     AutoRoute(
       path: '',
       page: ChatsRoute.page,
+    ),
+    AutoRoute(
+      path: 'conversation',
+      page: ConversationRoute.page,
+      meta: const {
+        "hidesBottomBarWhenPushed": true,
+      },
     ),
   ],
 );

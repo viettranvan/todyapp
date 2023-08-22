@@ -3,6 +3,7 @@ import 'package:todyapp/utils/index.dart';
 
 enum ButtonStyles {
   elevated(AppColors.brandPrimary, AppColors.neutralWhite),
+  elevatedGrey(AppColors.greyBackground, AppColors.neutralPrimary),
   disable(AppColors.neutral9, AppColors.neutralWhite),
   outline(Colors.transparent, AppColors.neutralPrimary),
   ;

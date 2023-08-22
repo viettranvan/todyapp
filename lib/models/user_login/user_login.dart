@@ -31,9 +31,11 @@ class UserLogin {
     return UserLogin(
       localId: map['localId'] != null ? map['localId'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
-      displayName: map['displayName'] != null ? map['displayName'] as String : null,
+      displayName:
+          map['displayName'] != null ? map['displayName'] as String : null,
       idToken: map['idToken'] != null ? map['idToken'] as String : null,
-      refreshToken: map['refreshToken'] != null ? map['refreshToken'] as String : null,
+      refreshToken:
+          map['refreshToken'] != null ? map['refreshToken'] as String : null,
       photoUrl: map['photoUrl'] != null ? map['photoUrl'] as String : null,
     );
   }

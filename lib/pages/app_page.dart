@@ -30,10 +30,8 @@ class AppPage extends StatelessWidget {
   Widget _buildBottomNavigationBar(BuildContext context) {
     final hidesBottomBarWhenPushed =
         context.tabsRouter.topMatch.meta['hidesBottomBarWhenPushed'] == true;
-    return AnimatedOpacity(
-      curve: Curves.easeInOut,
-      duration: const Duration(milliseconds: 500),
-      opacity: hidesBottomBarWhenPushed ? 0 : 1,
+    return Visibility(
+      visible: !hidesBottomBarWhenPushed,
       child: Container(
         height: 70 + MediaQuery.paddingOf(context).bottom,
         padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).bottom),

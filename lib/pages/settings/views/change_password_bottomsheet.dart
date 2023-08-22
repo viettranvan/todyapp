@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:todyapp/components/index.dart';
+import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
 class ChangePasswordBottomSheet {
@@ -106,6 +108,23 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                     title: context.strings.submit,
                     onPressed: () => _onSubmit(context),
                   ),
+                  const SizedBox(height: 12),
+                  AppButton(
+                    title: context.strings.cancel,
+                    buttonStyle: ButtonStyles.elevatedGrey,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  const SizedBox(height: 12),
+                  GestureDetector(
+                    onTap: () => _onForgotPassword(context),
+                    child: Center(
+                      child: Text(
+                        '${context.strings.forgotPassword}?',
+                        style: AppTextStyles.aBeeZeeRegular18
+                            .copyWith(color: AppColors.textBlue),
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 48),
                 ],
               ),
@@ -121,5 +140,11 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
       widget.onChangePassword
           .call(oldPasswordController.text, confirmNewPasswordController.text);
     }
+  }
+
+  _onForgotPassword(BuildContext context) {
+    // close bottom sheet
+    Navigator.pop(context);
+    context.router.push(const ForgotPasswordRoute());
   }
 }

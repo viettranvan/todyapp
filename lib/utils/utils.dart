@@ -1,3 +1,5 @@
+const fakeUrl = 'https://img.memegenerator.net/images/8249607.jpg';
+
 //**** EMAIL RegExp ****/
 final regexValidEmail = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 

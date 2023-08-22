@@ -53,4 +53,9 @@ class AppAssets {
   static const icHome = 'assets/icons/ic-home.svg';
   static const icLogOut = 'assets/icons/ic-log-out.svg';
   static const icCamera = 'assets/icons/ic-camera.svg';
+  static const icSearch = 'assets/icons/ic-search.svg';
+  static const icSendMessage = 'assets/icons/ic-send-message.svg';
+  static const icWrite = 'assets/icons/ic-write.svg';
+  static const icVideo = 'assets/icons/ic-video.svg';
+  static const icCall = 'assets/icons/ic-call.svg';
 }
