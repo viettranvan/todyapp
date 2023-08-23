@@ -58,4 +58,5 @@ class AppAssets {
   static const icWrite = 'assets/icons/ic-write.svg';
   static const icVideo = 'assets/icons/ic-video.svg';
   static const icCall = 'assets/icons/ic-call.svg';
+  static const icScrollDown = 'assets/icons/ic-scroll-down.svg';
 }

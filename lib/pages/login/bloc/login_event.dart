@@ -4,3 +4,5 @@ part of 'login_bloc.dart';
 sealed class LoginEvent {}
 
 final class SendLoginRequest extends LoginEvent {}
+
+final class GoogleLoginRequest extends LoginEvent {}

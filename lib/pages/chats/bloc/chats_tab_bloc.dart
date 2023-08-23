@@ -22,8 +22,9 @@ class ChatsTabBloc extends Bloc<ChatsTabEvent, ChatsTabState> {
       var uid = await locator<AppStorage>().getValue(AppStorageKey.uid);
       var userProfile =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      if (userProfile.data() != null) {
-        for (var item in userProfile.data()!["friends"]) {
+      var data = userProfile.data()?["messageWith"];
+      if (data != null) {
+        for (var item in data) {
           var docSnap = await FirebaseFirestore.instance
               .collection('users')
               .doc(item)
@@ -32,8 +33,8 @@ class ChatsTabBloc extends Bloc<ChatsTabEvent, ChatsTabState> {
             listUsers.add(UserProfile.fromMap(docSnap.data()!));
           }
         }
-        emit(Success(listUsers: listUsers));
       }
+      emit(Success(listUsers: listUsers));
     } catch (e) {
       emit(Failure(e.toString()));
     }

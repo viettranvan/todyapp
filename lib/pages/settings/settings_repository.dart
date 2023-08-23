@@ -23,6 +23,5 @@ class SettingsRepository {
   }) =>
       AuthService().updateAvatar(photoUrl: photoUrl);
 
-  Future<UserProfile> getUserProfile() =>
-      UserService().getUserProfile(userId: 'firebaseUser.uid');
+  Future<UserProfile> getUserProfile() => UserService().getUserProfile();
 }

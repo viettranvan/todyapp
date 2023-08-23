@@ -74,7 +74,8 @@ abstract class $RootRouter extends _i15.RootStackRouter {
         routeData: routeData,
         child: _i5.ConversationPage(
           key: args.key,
-          partnerUser: args.partnerUser,
+          partnerProfile: args.partnerProfile,
+          myProfile: args.myProfile,
         ),
       );
     },
@@ -249,13 +250,15 @@ class ChatsTabRoute extends _i15.PageRouteInfo<void> {
 class ConversationRoute extends _i15.PageRouteInfo<ConversationRouteArgs> {
   ConversationRoute({
     _i16.Key? key,
-    required _i17.UserProfile partnerUser,
+    required _i17.UserProfile partnerProfile,
+    required _i17.UserProfile myProfile,
     List<_i15.PageRouteInfo>? children,
   }) : super(
           ConversationRoute.name,
           args: ConversationRouteArgs(
             key: key,
-            partnerUser: partnerUser,
+            partnerProfile: partnerProfile,
+            myProfile: myProfile,
           ),
           initialChildren: children,
         );
@@ -269,16 +272,19 @@ class ConversationRoute extends _i15.PageRouteInfo<ConversationRouteArgs> {
 class ConversationRouteArgs {
   const ConversationRouteArgs({
     this.key,
-    required this.partnerUser,
+    required this.partnerProfile,
+    required this.myProfile,
   });
 
   final _i16.Key? key;
 
-  final _i17.UserProfile partnerUser;
+  final _i17.UserProfile partnerProfile;
+
+  final _i17.UserProfile myProfile;
 
   @override
   String toString() {
-    return 'ConversationRouteArgs{key: $key, partnerUser: $partnerUser}';
+    return 'ConversationRouteArgs{key: $key, partnerProfile: $partnerProfile, myProfile: $myProfile}';
   }
 }
 

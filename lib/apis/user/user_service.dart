@@ -1,19 +1,16 @@
-import 'package:todyapp/apis/api_client/index.dart';
-import 'package:todyapp/apis/user/user_request.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todyapp/models/index.dart';
+import 'package:todyapp/utils/index.dart';
 
 class UserService {
   UserService();
-  final APIClient _client = APIClient();
 
-  Future<UserProfile> getUserProfile({
-    required String userId,
-  }) async {
-    var request = UserRequest.getUserProfile(userId: userId);
+  Future<UserProfile> getUserProfile() async {
+    var userId = await locator<AppStorage>().getValue(AppStorageKey.uid);
+    var docSnap =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+    var userMap = docSnap.data() ?? {};
 
-    var response = await _client.execute(
-        request: request, apiVersion: ApiVersion.dioFireStore);
-
-    return UserProfile.fromMap(response.data["fields"]);
+    return UserProfile.fromMap(userMap);
   }
 }

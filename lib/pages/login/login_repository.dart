@@ -9,4 +9,6 @@ class LoginRepository {
     required String password,
   }) =>
       AuthService().signInWithPassword(email: email, password: password);
+
+  Future<UserAuth?> signInWithGoogle() => AuthService().signInWithGoogle();
 }

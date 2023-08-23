@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todyapp/apis/api_client/index.dart';
 import 'package:todyapp/apis/index.dart';
 import 'package:todyapp/models/index.dart';
@@ -17,6 +19,38 @@ class AuthService {
 
     var response = await _client.execute(request: request);
     return UserAuth.fromMap(response.data);
+  }
+
+  Future<UserAuth?> signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    final firebaseUser =
+        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
+
+    if (firebaseUser != null) {
+      final users = FirebaseFirestore.instance.collection('users');
+      var check = await users.where('id', isEqualTo: firebaseUser.uid).get();
+      if (check.docs.isEmpty) {
+        users.doc(firebaseUser.uid).set({
+          'displayName': firebaseUser.displayName,
+          'photoUrl': firebaseUser.photoURL,
+          'email': firebaseUser.email,
+          'id': firebaseUser.uid
+        });
+      }
+      return UserAuth(
+        email: firebaseUser.email,
+        localId: firebaseUser.uid,
+        idToken: await firebaseUser.getIdToken(),
+        refreshToken: firebaseUser.refreshToken,
+      );
+    }
+    return null;
   }
 
   Future<void> signUp({

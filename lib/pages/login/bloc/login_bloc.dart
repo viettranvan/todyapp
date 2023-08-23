@@ -12,6 +12,7 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<SendLoginRequest>(_onSendLoginRequest);
+    on<GoogleLoginRequest>(_onGoogleLogin);
   }
 
   final TextEditingController emailController = TextEditingController();
@@ -37,6 +38,28 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (e.status == Status.error) {
         emit(Failure(e.error.toString()));
       }
+    } catch (e) {
+      emit(Failure(e.toString()));
+    }
+  }
+
+  FutureOr<void> _onGoogleLogin(
+      GoogleLoginRequest event, Emitter<LoginState> emit) async {
+    try {
+      emit(Loading());
+
+      var response = await repository.signInWithGoogle();
+
+      if (response == null) emit(Failure("Something went wrong"));
+      await locator<AppStorage>()
+          .setValue(AppStorageKey.email, response!.email);
+      await locator<AppStorage>().setValue(AppStorageKey.uid, response.localId);
+      await locator<AppStorage>()
+          .setValue(AppStorageKey.idToken, response.idToken);
+      await locator<AppStorage>()
+          .setValue(AppStorageKey.refreshToken, response.refreshToken);
+
+      emit(Success());
     } catch (e) {
       emit(Failure(e.toString()));
     }

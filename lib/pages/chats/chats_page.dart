@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/chats/bloc/chats_tab_bloc.dart';
+import 'package:todyapp/pages/settings/settings_repository.dart';
 import 'package:todyapp/router/router.gr.dart';
 import 'package:todyapp/utils/index.dart';
 
@@ -79,8 +80,12 @@ class ChatsPage extends StatelessWidget {
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
-        context.router.push(ConversationRoute(partnerUser: item));
+      onTap: () async {
+        var myProfile = await SettingsRepository().getUserProfile();
+        if (context.mounted) {
+          context.router.push(
+              ConversationRoute(partnerProfile: item, myProfile: myProfile));
+        }
       },
       child: Row(
         children: [

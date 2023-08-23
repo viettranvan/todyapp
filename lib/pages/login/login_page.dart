@@ -1,10 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:todyapp/components/index.dart';
 import 'package:todyapp/pages/login/views/index.dart';
 import 'package:todyapp/router/router.gr.dart';
@@ -161,28 +158,7 @@ class LoginPage extends StatelessWidget {
     }
   }
 
-  _onTapGoogle(BuildContext context) async {
-    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    final firebaseUser =
-        (await FirebaseAuth.instance.signInWithCredential(credential)).user;
-
-    if (firebaseUser != null) {
-      final users = FirebaseFirestore.instance.collection('users');
-      var check = await users.where('id', isEqualTo: firebaseUser.uid).get();
-      if (check.docs.isEmpty) {
-        users.doc(firebaseUser.uid).set({
-          'displayName': firebaseUser.displayName,
-          'photoUrl': firebaseUser.photoURL,
-          'email': firebaseUser.email,
-          'id': firebaseUser.uid
-        });
-      }
-    }
+  _onTapGoogle(BuildContext context) {
+    context.read<LoginBloc>().add(GoogleLoginRequest());
   }
 }

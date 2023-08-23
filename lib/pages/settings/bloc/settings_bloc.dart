@@ -28,6 +28,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       GetUserProfile event, Emitter<SettingsState> emit) async {
     try {
       emit(Loading());
+
       var res = await repository.getUserProfile();
 
       emit(ProfileSuccess(user: res));
