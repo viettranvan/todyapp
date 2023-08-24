@@ -107,6 +107,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
+      locale: const Locale('vi'),
       supportedLocales: AppLocalizations.supportedLocales,
       debugShowCheckedModeBanner: false,
       routerDelegate: _appRouter.delegate(),

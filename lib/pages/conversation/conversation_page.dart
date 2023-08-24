@@ -2,9 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:todyapp/models/index.dart';
 import 'package:todyapp/pages/conversation/views/index.dart';
 import 'package:todyapp/pages/conversation/widgets/index.dart';
+import 'package:todyapp/utils/index.dart';
 
 import 'bloc/conversation_bloc.dart';
 
@@ -62,26 +64,15 @@ class ConversationPage extends StatelessWidget {
                           messages.add(MessageChat.fromDocument(item));
                         }
                         return ListView.builder(
-                          controller:
-                              context.read<ConversationBloc>().scrollController,
-                          padding: const EdgeInsets.all(16),
-                          itemCount: messages.length,
-                          shrinkWrap: true,
-                          reverse: true,
-                          itemBuilder: (context, index) {
-                            return MessageBubble.first(
-                              userImage:
-                                  (messages[index].idFrom == myProfile.id)
-                                      ? myProfile.photoUrl
-                                      : partnerProfile.photoUrl,
-                              username: (messages[index].idFrom == myProfile.id)
-                                  ? myProfile.displayName
-                                  : partnerProfile.displayName,
-                              message: messages[index].content,
-                              isMe: messages[index].idFrom == myProfile.id,
-                            );
-                          },
-                        );
+                            controller: context
+                                .read<ConversationBloc>()
+                                .scrollController,
+                            padding: const EdgeInsets.all(16),
+                            itemCount: messages.length,
+                            shrinkWrap: true,
+                            reverse: true,
+                            itemBuilder: (_, index) =>
+                                itemChatBuilder(context, index, messages));
                       }
                     }
                     return const FlutterLogo();
@@ -105,5 +96,95 @@ class ConversationPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  itemChatBuilder(BuildContext context, int index, List<MessageChat> messages) {
+    bool isMe() => messages[index].idFrom == myProfile.id;
+
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        children: [
+          // showMessgaDateTime()
+
+          Visibility(
+            visible: showMessgaDateTime(messages, index),
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                _renderTime(context, messages[index].timestamp),
+                style: AppTextStyles.aBeeZeeRegular16,
+              ),
+            ),
+          ),
+          showNextBubbleMessage(messages, index)
+              ? MessageBubble.next(
+                  message: messages[index].content, isMe: isMe())
+              : MessageBubble.first(
+                  userImage:
+                      isMe() ? myProfile.photoUrl : partnerProfile.photoUrl,
+                  username: isMe()
+                      ? myProfile.displayName
+                      : partnerProfile.displayName,
+                  message: messages[index].content,
+                  isMe: isMe(),
+                ),
+        ],
+      ),
+    );
+  }
+
+  bool showMessgaDateTime(List<MessageChat> messages, int index) {
+    if (index == messages.length - 1) return true;
+
+    if (index < messages.length - 1) {
+      // because of list is reversed so previous item must be index + 1
+      var currentTimestamp = messages[index].timestamp.toDate();
+      var previousTimestamp = messages[index + 1].timestamp.toDate();
+      int inMinute = currentTimestamp.difference(previousTimestamp).inMinutes;
+
+      return inMinute > 60;
+    }
+    return false;
+  }
+
+  bool showNextBubbleMessage(List<MessageChat> messages, int index) {
+    if (index == messages.length) return false;
+
+    if (index < messages.length - 1) {
+      // because of list is reversed so previous item must be index + 1
+      var currentIdFrom = messages[index].idFrom;
+      var previousIdFrom = messages[index + 1].idFrom;
+      var currentTimestamp = messages[index].timestamp.toDate();
+      var previousTimestamp = messages[index + 1].timestamp.toDate();
+
+      int inMinute = currentTimestamp.difference(previousTimestamp).inMinutes;
+
+      return inMinute < 5 && currentIdFrom == previousIdFrom;
+    }
+    return false;
+  }
+
+  String _renderTime(BuildContext context, Timestamp timestamp) {
+    var date = timestamp.toDate();
+    var now = DateTime.now();
+
+    var time = DateFormat('HH:mm').format(date);
+
+    String? countryCode = Localizations.localeOf(context).toString();
+
+    String dateFormat(String pattern) =>
+        DateFormat(pattern, countryCode).format(date);
+
+    final int inDays = now.difference(date).inDays;
+    if (date.year == now.year) {
+      if (inDays < now.weekday) {
+        return '${dateFormat('EEE')}, $time';
+      } else {
+        return '$time, ${dateFormat('EEE')},${dateFormat('dd MMM')}';
+      }
+    } else {
+      return '$time, ${dateFormat('EEE')}, ${dateFormat('dd MMM')}, ${date.year}';
+    }
   }
 }

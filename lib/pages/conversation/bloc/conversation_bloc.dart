@@ -29,7 +29,7 @@ class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
       MessageChat messageChat = MessageChat(
         idFrom: event.myProfile.id ?? '',
         idTo: event.partnerProfile.id ?? '',
-        timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+        timestamp: Timestamp.fromDate(DateTime.now()),
         content: chatController.text,
         type: 0,
       );
