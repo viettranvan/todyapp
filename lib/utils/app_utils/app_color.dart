@@ -33,4 +33,6 @@ class AppColors {
 
   static const Color yellowPrimary = Color(0xffF5D155);
   static const Color socialBackground = Color(0xffF3F5F9);
+
+  static const Color kLightThemeSplashColor = Color(0x66C8C8C8);
 }

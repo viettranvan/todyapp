@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:todyapp/models/index.dart';
 import 'package:todyapp/pages/conversation/views/index.dart';
 import 'package:todyapp/pages/conversation/widgets/index.dart';
+import 'package:todyapp/utils/extensions/num_extension.dart';
 import 'package:todyapp/utils/index.dart';
 
 import 'bloc/conversation_bloc.dart';
@@ -18,26 +19,19 @@ class ConversationPage extends StatelessWidget {
     required this.myProfile,
   });
 
-  final UserProfile partnerProfile;
   final UserProfile myProfile;
-
-  String get groupId {
-    var myId = myProfile.id;
-    var partnerId = partnerProfile.id;
-    if (myId == null || partnerId == null) return '';
-
-    if (myId.compareTo(partnerId) > 0) {
-      return '$myId-$partnerId';
-    } else {
-      return '$partnerId-$myId';
-    }
-  }
+  final UserProfile partnerProfile;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ConversationBloc(),
+      create: (context) => ConversationBloc()
+        ..add(InitialConversation(
+          myProfile: myProfile,
+          partnerProfile: partnerProfile,
+        )),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: ConversationAppBar(partnerProfile: partnerProfile),
         floatingActionButton: Builder(
           builder: (context) {
@@ -51,32 +45,41 @@ class ConversationPage extends StatelessWidget {
         body: Column(
           children: [
             Expanded(
-              child: Builder(builder: (context) {
-                return StreamBuilder<QuerySnapshot>(
-                  stream: context
-                      .read<ConversationBloc>()
-                      .chatStream(groupId: groupId),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      if (snapshot.data!.docs.isNotEmpty) {
-                        List<MessageChat> messages = [];
-                        for (var item in snapshot.data!.docs) {
-                          messages.add(MessageChat.fromDocument(item));
-                        }
-                        return ListView.builder(
-                            controller: context
-                                .read<ConversationBloc>()
-                                .scrollController,
-                            padding: const EdgeInsets.all(16),
-                            itemCount: messages.length,
-                            shrinkWrap: true,
-                            reverse: true,
-                            itemBuilder: (_, index) =>
-                                itemChatBuilder(context, index, messages));
-                      }
-                    }
-                    return const FlutterLogo();
+              child: BlocBuilder<ConversationBloc, ConversationState>(
+                  builder: (context, state) {
+                if (state.status == ConversationStatus.initial) {
+                  return const SizedBox();
+                }
+                return GestureDetector(
+                  onTap: () {
+                    context
+                        .read<ConversationBloc>()
+                        .add(HideKeyboardAndSticker());
                   },
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: context.read<ConversationBloc>().chatStream(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data!.docs.isNotEmpty) {
+                          List<MessageChat> messages = [];
+                          for (var item in snapshot.data!.docs) {
+                            messages.add(MessageChat.fromDocument(item));
+                          }
+                          return ListView.builder(
+                              controller: context
+                                  .read<ConversationBloc>()
+                                  .scrollController,
+                              padding: const EdgeInsets.all(16),
+                              itemCount: messages.length,
+                              shrinkWrap: true,
+                              reverse: true,
+                              itemBuilder: (_, index) =>
+                                  itemChatBuilder(context, index, messages));
+                        }
+                      }
+                      return const FlutterLogo();
+                    },
+                  ),
                 );
               }),
             ),
@@ -84,11 +87,25 @@ class ConversationPage extends StatelessWidget {
               builder: (context, state) {
                 var bloc = context.read<ConversationBloc>();
                 return InputSection(
+                  focusNode: bloc.focusNode,
                   controller: bloc.chatController,
-                  onSendMessage: () => bloc.add(SendTextMessage(
-                    myProfile: myProfile,
-                    partnerProfile: partnerProfile,
-                  )),
+                  onSubmitted: (value) => bloc.add(HideKeyboardAndSticker()),
+                  onTap: () =>
+                      bloc.focusNode.hasFocus ? () {} : bloc.add(HandleFocus()),
+                  onTapEmoji: () => bloc.add(HandleFocus()),
+                  onSendMessage: () => bloc.add(SendTextMessage()),
+                );
+              },
+            ),
+            BlocBuilder<ConversationBloc, ConversationState>(
+              builder: (context, state) {
+                return StickerBuilder(
+                  sendSticker: (stickerPath) => context
+                      .read<ConversationBloc>()
+                      .add(SendTextMessage(stickerPath: stickerPath)),
+                  isClosed: state.isClosed,
+                  showingStatus: state.showingStatus,
+                  // hideKeyboard: state.showSticker,
                 );
               },
             ),
@@ -100,13 +117,12 @@ class ConversationPage extends StatelessWidget {
 
   itemChatBuilder(BuildContext context, int index, List<MessageChat> messages) {
     bool isMe() => messages[index].idFrom == myProfile.id;
+    print('log: ${messages[index].idFrom} ');
 
     return GestureDetector(
       onTap: () {},
       child: Column(
         children: [
-          // showMessgaDateTime()
-
           Visibility(
             visible: showMessgaDateTime(messages, index),
             child: Padding(
@@ -119,7 +135,10 @@ class ConversationPage extends StatelessWidget {
           ),
           showNextBubbleMessage(messages, index)
               ? MessageBubble.next(
-                  message: messages[index].content, isMe: isMe())
+                  message: messages[index].content,
+                  isMe: isMe(),
+                  contentType: messages[index].type.getContentType,
+                )
               : MessageBubble.first(
                   userImage:
                       isMe() ? myProfile.photoUrl : partnerProfile.photoUrl,
@@ -128,6 +147,7 @@ class ConversationPage extends StatelessWidget {
                       : partnerProfile.displayName,
                   message: messages[index].content,
                   isMe: isMe(),
+                  contentType: messages[index].type.getContentType,
                 ),
         ],
       ),

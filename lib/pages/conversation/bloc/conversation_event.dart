@@ -3,23 +3,23 @@ part of 'conversation_bloc.dart';
 @immutable
 sealed class ConversationEvent {}
 
-final class SendTextMessage extends ConversationEvent {
+final class InitialConversation extends ConversationEvent {
   final UserProfile myProfile;
   final UserProfile partnerProfile;
 
-  String get groupId {
-    var myId = myProfile.id;
-    var partnerId = partnerProfile.id;
-    if (myId == null || partnerId == null) return '';
+  InitialConversation({required this.myProfile, required this.partnerProfile});
+}
 
-    if (myId.compareTo(partnerId) > 0) {
-      return '$myId-$partnerId';
-    } else {
-      return '$partnerId-$myId';
-    }
-  }
+final class SendTextMessage extends ConversationEvent {
+  final String? stickerPath;
 
-  SendTextMessage({required this.myProfile, required this.partnerProfile});
+  SendTextMessage({
+    this.stickerPath,
+  });
 }
 
 final class ScrollToLastMessage extends ConversationEvent {}
+
+final class HandleFocus extends ConversationEvent {}
+
+final class HideKeyboardAndSticker extends ConversationEvent {}

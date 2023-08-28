@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todyapp/utils/index.dart';
 
 class ChatTextField extends StatelessWidget {
   const ChatTextField({
     Key? key,
     required this.controller,
+    required this.onTapEmoji,
+    required this.onTap,
+    required this.onSubmitted,
+    required this.focusNode,
   }) : super(key: key);
 
   final TextEditingController controller;
+  final VoidCallback onTapEmoji;
+  final VoidCallback onTap;
+  final Function(String)? onSubmitted;
+  final FocusNode focusNode;
 
   get _border => OutlineInputBorder(
         borderRadius: BorderRadius.circular(20),
@@ -19,34 +26,34 @@ class ChatTextField extends StatelessWidget {
       );
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: TextField(
-        textAlignVertical: TextAlignVertical.center,
-        controller: controller,
-        style: AppTextStyles.aBeeZeeRegular16,
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: AppColors.neutralWhite,
-          hintText: context.strings.search,
-          contentPadding: EdgeInsets.zero,
-          hintStyle: AppTextStyles.aBeeZeeRegular16
-              .copyWith(color: AppColors.neutralGhost),
-          prefixIcon: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: SvgPicture.asset(
-              AppAssets.icSearch,
-              height: 24,
-              width: 24,
-              colorFilter: const ColorFilter.mode(
-                  AppColors.textBlackSecondary, BlendMode.srcIn),
-            ),
+    return TextField(
+      textAlignVertical: TextAlignVertical.center,
+      controller: controller,
+      focusNode: focusNode,
+      onTap: onTap,
+      onSubmitted: onSubmitted,
+      style: AppTextStyles.aBeeZeeRegular16,
+      textInputAction: TextInputAction.done,
+      minLines: 1,
+      maxLines: 5,
+      decoration: InputDecoration(
+        filled: true,
+        suffixIcon: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: onTapEmoji,
+          child: Icon(
+            focusNode.hasFocus ? Icons.tag_faces : Icons.keyboard,
+            size: 30,
           ),
-          border: _border,
-          enabledBorder: _border,
-          focusedBorder: _border,
         ),
+        fillColor: AppColors.neutralWhite,
+        hintText: context.strings.typeSomething,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+        hintStyle: AppTextStyles.aBeeZeeRegular16
+            .copyWith(color: AppColors.neutralGhost),
+        border: _border,
+        enabledBorder: _border,
+        focusedBorder: _border,
       ),
     );
   }
