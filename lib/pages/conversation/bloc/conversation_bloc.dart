@@ -14,12 +14,14 @@ class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
           showingStatus: Showing.none,
           isClosed: false,
           status: ConversationStatus.initial,
+          messageSelected: null,
         )) {
     on<InitialConversation>(_onInitial);
     on<SendTextMessage>(_onSendMessage);
     on<ScrollToLastMessage>(_scrollToLastMessage);
     on<HandleFocus>(_onHandleFocus);
     on<HideKeyboardAndSticker>(_onHide);
+    on<ShowMessageDetail>(_onShowMessageDetail);
   }
 
   final TextEditingController chatController = TextEditingController();
@@ -148,5 +150,14 @@ class ConversationBloc extends Bloc<ConversationEvent, ConversationState> {
       }
     }
     return '';
+  }
+
+  FutureOr<void> _onShowMessageDetail(
+      ShowMessageDetail event, Emitter<ConversationState> emit) {
+    if (state.messageSelected == event.messageChat) {
+      emit(state.copyWith(messageSelected: null));
+    } else {
+      emit(state.copyWith(messageSelected: event.messageChat));
+    }
   }
 }

@@ -35,4 +35,8 @@ class AppColors {
   static const Color socialBackground = Color(0xffF3F5F9);
 
   static const Color kLightThemeSplashColor = Color(0x66C8C8C8);
+
+  // chat
+  static const Color chatBlueBackground = Color(0xff4760F6);
+  static const Color chatGreyBackground = Color(0xffF1F1F1);
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class MessageChat {
+class MessageChat extends Equatable {
   final String idFrom;
   final String idTo;
   final Timestamp timestamp;
@@ -38,4 +39,7 @@ class MessageChat {
         content: content,
         type: type);
   }
+
+  @override
+  List<Object?> get props => [idFrom, idTo, content, type, type];
 }

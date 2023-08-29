@@ -23,3 +23,9 @@ final class ScrollToLastMessage extends ConversationEvent {}
 final class HandleFocus extends ConversationEvent {}
 
 final class HideKeyboardAndSticker extends ConversationEvent {}
+
+final class ShowMessageDetail extends ConversationEvent {
+  final MessageChat messageChat;
+
+  ShowMessageDetail({required this.messageChat});
+}

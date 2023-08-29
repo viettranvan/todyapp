@@ -1,5 +1,6 @@
 // A MessageBubble for showing a single chat message on the ChatScreen.
 import 'package:flutter/material.dart';
+import 'package:todyapp/utils/index.dart';
 
 enum ChatContentType {
   text(0),
@@ -20,6 +21,9 @@ class MessageBubble extends StatelessWidget {
     required this.message,
     required this.isMe,
     required this.contentType,
+    required this.sendingTime,
+    required this.showDetail,
+    required this.onTapMessage,
   }) : isFirstInSequence = true;
 
   // Create a amessage bubble that continues the sequence.
@@ -28,6 +32,9 @@ class MessageBubble extends StatelessWidget {
     required this.message,
     required this.isMe,
     required this.contentType,
+    required this.sendingTime,
+    required this.showDetail,
+    required this.onTapMessage,
   })  : isFirstInSequence = false,
         userImage = null,
         username = null;
@@ -52,6 +59,9 @@ class MessageBubble extends StatelessWidget {
   final bool isMe;
 
   final ChatContentType contentType;
+  final String sendingTime;
+  final bool showDetail;
+  final VoidCallback onTapMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -117,48 +127,64 @@ class MessageBubble extends StatelessWidget {
     switch (contentType) {
       case ChatContentType.text:
         return // The "speech" box surrounding the message.
-            Container(
-          decoration: BoxDecoration(
-            color: isMe
-                ? Colors.grey[300]
-                : theme.colorScheme.secondary.withAlpha(200),
-            // Only show the message bubble's "speaking edge" if first in
-            // the chain.
-            // Whether the "speaking edge" is on the left or right depends
-            // on whether or not the message bubble is the current user.
-            borderRadius: BorderRadius.only(
-              topLeft: !isMe && isFirstInSequence
-                  ? Radius.zero
-                  : const Radius.circular(12),
-              topRight: isMe && isFirstInSequence
-                  ? Radius.zero
-                  : const Radius.circular(12),
-              bottomLeft: const Radius.circular(12),
-              bottomRight: const Radius.circular(12),
-            ),
-          ),
-          // Set some reasonable constraints on the width of the
-          // message bubble so it can adjust to the amount of text
-          // it should show.
-          constraints: const BoxConstraints(maxWidth: 200),
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 14,
-          ),
-          // Margin around the bubble.
-          margin: const EdgeInsets.symmetric(
-            vertical: 4,
-            horizontal: 12,
-          ),
-          child: Text(
-            message,
-            style: TextStyle(
-              // Add a little line spacing to make the text look nicer
-              // when multilined.
-              height: 1.3,
-              color: isMe ? Colors.black87 : theme.colorScheme.onSecondary,
-            ),
-            softWrap: true,
+            GestureDetector(
+          onTap: () {},
+          child: Column(
+            children: [
+              Visibility(
+                visible: showDetail,
+                child: Text(
+                  sendingTime,
+                  style: AppTextStyles.aBeeZeeRegular16,
+                ),
+              ),
+              GestureDetector(
+                onTap: onTapMessage,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: _getColor(),
+
+                    // Only show the message bubble's "speaking edge" if first in
+                    // the chain.
+                    // Whether the "speaking edge" is on the left or right depends
+                    // on whether or not the message bubble is the current user.
+                    borderRadius: BorderRadius.only(
+                      topLeft: !isMe && isFirstInSequence
+                          ? Radius.zero
+                          : const Radius.circular(12),
+                      topRight: isMe && isFirstInSequence
+                          ? Radius.zero
+                          : const Radius.circular(12),
+                      bottomLeft: const Radius.circular(12),
+                      bottomRight: const Radius.circular(12),
+                    ),
+                  ),
+                  // Set some reasonable constraints on the width of the
+                  // message bubble so it can adjust to the amount of text
+                  // it should show.
+                  constraints: const BoxConstraints(maxWidth: 200),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 14,
+                  ),
+                  // Margin around the bubble.
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 4,
+                    horizontal: 12,
+                  ),
+                  child: Text(
+                    message,
+                    style: TextStyle(
+                      // Add a little line spacing to make the text look nicer
+                      // when multilined.
+                      height: 1.3,
+                      color: isMe ? AppColors.neutralWhite : Colors.black87,
+                    ),
+                    softWrap: true,
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       case ChatContentType.sticker:
@@ -171,5 +197,11 @@ class MessageBubble extends StatelessWidget {
       case ChatContentType.image:
         break;
     }
+  }
+
+  Color _getColor() {
+    Color color =
+        isMe ? AppColors.chatBlueBackground : AppColors.chatGreyBackground;
+    return showDetail ? color.toDarkColor : color;
   }
 }
